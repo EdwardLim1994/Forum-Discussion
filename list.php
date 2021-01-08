@@ -17,7 +17,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="./dist/mdb.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,12 +31,11 @@
 </head>
 
 <body>
-    <header class="fixed-top">
+    <header class="fixed-top" style="width:100%;">
         <nav class="navbar navbar-light header scrolling-navbar">
             <div class="container-fluid">
                 <div class="row" style="width:100%;">
                     <div class="col-4">
-
                     </div>
                     <div class="col-4">
                         <a href="https://www.nightcatdigitalsolutions.com" class="navbar-brand mx-auto">
@@ -49,7 +48,7 @@
                                 <h5></h5>
                             </div>
                             <div class="col-6 text-left">
-                                <button class="btn py-3 text-white loginBtn">Login/Register</button>
+                                <button class="btn py-3 text-white loginBtn" data-toggle="modal" data-target="#myModal">Login/Register</button>
                             </div>
                         </div>
                     </div>
@@ -57,6 +56,106 @@
             </div>
         </nav>
     </header>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs row" id="myTab" role="tablist">
+                        <li class="nav-item col-6 text-center">
+                            <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">
+                                <h5>Login</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item col-6 text-center">
+                            <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">
+                                <h5>Register</h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <div class="modal-body">
+                                <div class="md-form mb-5">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    <input type="text" id="orangeForm-name" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
+                                </div>
+                                <div class="md-form mb-4">
+                                    <i class="fas fa-lock prefix grey-text"></i>
+                                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary save">Login</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <div class="modal-body">
+                                <div class="md-form mb-5">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    <input type="text" id="orangeForm-name" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
+                                </div>
+
+                                <div class="md-form mb-4">
+                                    <i class="fas fa-lock prefix grey-text"></i>
+                                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                                </div>
+
+                                <div class="md-form mb-4">
+                                    <i class="fas fa-lock prefix grey-text"></i>
+                                    <input type="password" id="defaultForm-pass" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="defaultForm-pass">Confirm password</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary save">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="postQuestionForm" tabindex="-1" role="dialog" aria-labelledby="postQuestionForm" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Post a Question</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="form-group">
+                        <label for="questionTitle">Title</label>
+                        <input type="text" id="questionTitle" class="rounded-lg form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="questionContent">Content</label>
+                        <textarea id="questionContent" class="rounded-lg form-control" rows="5"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-right">
+                    <button class="btn btn-default text-white">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Section -->
     <main class="main-section">
@@ -68,7 +167,7 @@
                         <h4 class="searchResult">Search Result : <span>xxxxxxx</span></h4>
                     </div>
                     <div class="col-6 text-right my-auto">
-                        <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn">Post a Question</button>
+                        <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionForm">Post a Question</button>
                     </div>
                 </div>
                 <div class="row">
@@ -141,6 +240,7 @@
 
 </body>
 <script type="text/javascript">
+
 
 </script>
 
