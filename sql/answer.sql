@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS Answer (
     id INT NOT NULL AUTO_INCREMENT,
     answer VARCHAR(1000) NOT NULL,
-    vote INT NOT NULL,
     postdate DATETIME NOT NULL,
     user_id INT NOT NULL,
     question_id INT NOT NULL,
