@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Logout</button>
+                <a href="./includes/functions/logout.inc.php" type="button" class="btn btn-danger">Logout</a>
             </div>
         </div>
     </div>
