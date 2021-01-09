@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['register'])) {
 
     $username = $_POST['registerUsername'];
     $password = password_hash($_POST['registerPassword'], PASSWORD_DEFAULT);

@@ -29,14 +29,14 @@
                                 </div>
                                 <div class="md-form mb-4">
                                     <i class="fas fa-lock prefix grey-text"></i>
-                                    <input type="password" id="loginPassword" name="loginPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate my-2" required>
-                                    <label data-error="Contains at least 6 characters with combination of digits and alphabert" data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your password</label>
+                                    <input type="password" id="loginPassword" name="loginPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" required>
+                                    <label data-error="Password contains more than 6 characters with digits and alphabert" data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your password</label>
                                     <p id="passwordAlert" class="text-danger invisible">Please fill in</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary save" name="submit">Login</button>
+                                <button type="submit" class="btn btn-primary save" name="login">Login</button>
                             </div>
                         </form>
                     </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" name="submit" class="btn btn-primary save">Register</button>
+                                <button type="submit" name="register" class="btn btn-primary save">Register</button>
                             </div>
                         </form>
                     </div>

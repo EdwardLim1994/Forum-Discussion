@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <header class="fixed-top" style="width:100%;">
     <nav class="navbar navbar-light header scrolling-navbar">
@@ -14,11 +14,15 @@
                 </div>
                 <div class="col-4 my-auto">
                     <div class="row">
-                        <div class="col-6 text-right">
-                            <h5></h5>
+                        <div class="col-6 text-right my-auto">
+                            <h5>
+                                <?php if (isset($_SESSION['id'])) {
+                                    echo "Hello, ". $_SESSION['username'] ." ^^";
+                                }
+                                ?>
+                            </h5>
                         </div>
                         <div class="col-6 text-left">
-
                             <?php
                             if (isset($_SESSION['id'])) {
                                 // if logined
@@ -46,4 +50,3 @@ if (isset($_SESSION['id'])) {
     include_once './includes/components/login_register_modal.php';
 }
 ?>
-

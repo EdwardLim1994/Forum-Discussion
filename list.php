@@ -3,26 +3,32 @@
 
 <head>
     <?php
-        include_once './includes/head.php';
+    include_once './includes/head.php';
     ?>
 </head>
 
 <body>
 
-    <?php 
-        include_once './includes/header.php';
+    <?php
+    if (isset($_GET['reason']) == "passwordnotmatch") {
+        include_once './includes/components/notification.php';
+    }
+    ?>
+
+    <?php
+    include_once './includes/header.php';
     ?>
 
     <!-- If not login -->
     <!-- Alert not login Modal -->
-    <?php 
-        include_once './includes/components/not_login_alert_modal.php';
+    <?php
+    include_once './includes/components/not_login_alert_modal.php';
     ?>
 
     <!-- If login -->
     <!-- Post Question Modal -->
-    <?php 
-        include_once './includes/components/post_question_modal.php';
+    <?php
+    include_once './includes/components/post_question_modal.php';
     ?>
 
     <!-- Main Section -->
@@ -73,7 +79,7 @@
                 </a>
 
             </section>
-            
+
             <section id="pagination" class="py-4">
 
             </section>
@@ -81,14 +87,17 @@
         </div>
     </main>
 
-    <?php 
-        include_once './includes/footer.php';
+    <?php
+    include_once './includes/footer.php';
     ?>
 
 </body>
 <script type="text/javascript">
-
-
+    <?php
+    if (isset($_GET['reason']) == "passwordnotmatch") {
+        echo "$('#passwordNotMatchModal').modal('show')";
+    }
+    ?>
 </script>
 
 </html>
