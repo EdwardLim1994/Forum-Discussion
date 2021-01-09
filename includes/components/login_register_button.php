@@ -1,0 +1,1 @@
+<button class="btn py-3 text-white loginBtn" data-toggle="modal" data-target="#loginRegisterModal">Login/Register</button>
