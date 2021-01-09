@@ -25,12 +25,12 @@
                                 <div class="md-form mb-5">
                                     <i class="fas fa-user prefix grey-text"></i>
                                     <input type="text" id="loginUsername" name="loginUsername" pattern="^[a-zA-Z].*" class="form-control validate my-2" required>
-                                    <label data-error="Username usually don't start from digit" data-success="Seem OK" for="loginUsername">Your name</label>
+                                    <label data-error="Username usually don't start from digit" data-success="Seem OK" for="loginUsername" id="loginUsernameLabel">Your name</label>
                                 </div>
                                 <div class="md-form mb-4">
                                     <i class="fas fa-lock prefix grey-text"></i>
                                     <input type="password" id="loginPassword" name="loginPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate my-2" required>
-                                    <label data-error="Contains at least 6 characters with combination of digits and alphabert" data-success="Seem OK" for="loginPassword">Your password</label>
+                                    <label data-error="Contains at least 6 characters with combination of digits and alphabert" data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your password</label>
                                     <p id="passwordAlert" class="text-danger invisible">Please fill in</p>
                                 </div>
                             </div>

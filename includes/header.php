@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <header class="fixed-top" style="width:100%;">
     <nav class="navbar navbar-light header scrolling-navbar">
         <div class="container-fluid">
@@ -15,15 +18,17 @@
                             <h5></h5>
                         </div>
                         <div class="col-6 text-left">
-                            <!-- If not login -->
+
                             <?php
-                            include_once './includes/components/login_register_button.php';
+                            if (isset($_SESSION['id'])) {
+                                // if logined
+                                include_once './includes/components/logout_button.php';
+                            } else {
+                                // if logouted
+                                include_once './includes/components/login_register_button.php';
+                            }
                             ?>
 
-                            <!-- If logined -->
-                            <?php
-                            include_once './includes/components/logout_button.php';
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -32,12 +37,13 @@
     </nav>
 </header>
 
-<!-- Logout Modal -->
 <?php
-include_once './includes/components/logout_modal.php';
+if (isset($_SESSION['id'])) {
+    // if logined
+    include_once './includes/components/logout_modal.php';
+} else {
+    // if logouted
+    include_once './includes/components/login_register_modal.php';
+}
 ?>
 
-<!-- Login/Register Modal -->
-<?php
-include_once './includes/components/login_register_modal.php';
-?>
