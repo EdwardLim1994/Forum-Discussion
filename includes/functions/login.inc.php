@@ -29,13 +29,13 @@ if (isset($_POST['login'])) {
             exit();
 
         } else {
-            header("location: ../../list.php?login=failed&reason=passwordnotmatch");
+            header("location: ../../list.php?reason=passwordnotmatch");
             mysqli_close($conn);
             exit();
 
         }
     } else {
-        header("location: ../../list.php?login=failed&reason=usernotexist");
+        header("location: ../../list.php?reason=usernotexist");
         mysqli_close($conn);
         exit();
     }

@@ -28,12 +28,12 @@ if (isset($_POST['register'])) {
             mysqli_close($conn);
             exit();
         } else {
-            header("location: ../../list.php?login=failed&reason=getnewdatafailed");
+            header("location: ../../list.php?reason=getnewdatafailed");
             mysqli_close($conn);
             exit();
         }
     } else {
-        header("location: ../../list.php?register=failed");
+        header("location: ../../list.php?reason=cannotinsertuserdataintodatabase");
         mysqli_close($conn);
         exit();
     }

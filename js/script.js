@@ -102,7 +102,6 @@ $(document).ready(function () {
     }
   });
 
-
   var loginUsernameFlag;
 
   $("#loginUsername").on("focusout", function () {
@@ -169,4 +168,5 @@ $(document).ready(function () {
       }
     });
   });
+
 });

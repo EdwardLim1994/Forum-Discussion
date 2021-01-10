@@ -39,6 +39,8 @@ session_start();
             </div>
         </div>
     </nav>
+    <div style="background-color:#FFFFFF;padding:40px;">
+    </div>
 </header>
 
 <?php

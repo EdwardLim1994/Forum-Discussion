@@ -11,7 +11,7 @@
 
     <?php
     if (isset($_GET['reason']) == "passwordnotmatch") {
-        include_once './includes/components/notification.php';
+        include_once './includes/components/wrong_password_alert.php';
     }
     ?>
 
@@ -19,17 +19,19 @@
     include_once './includes/header.php';
     ?>
 
-    <!-- If not login -->
-    <!-- Alert not login Modal -->
+
     <?php
-    include_once './includes/components/not_login_alert_modal.php';
+    if (isset($_SESSION['id'])) {
+        // if logined
+        //Post Question Modal
+        include_once './includes/components/post_question_modal.php';
+    } else {
+        // if logouted
+        //Alert not login Modal
+        include_once './includes/components/not_login_alert_modal.php';
+    }
     ?>
 
-    <!-- If login -->
-    <!-- Post Question Modal -->
-    <?php
-    include_once './includes/components/post_question_modal.php';
-    ?>
 
     <!-- Main Section -->
     <main class="main-section">
@@ -57,26 +59,10 @@
             <section class="questionList">
 
                 <!-- Question -->
-                <a class="card my-3" href="./forum.php">
-                    <div class="card-body p-4 px-5">
-                        <div class="row">
-                            <div class="col-3">
-                                <h2 class="card-title text-black">Question 1</h2>
-                            </div>
-                            <div class="col-7 py-auto">
-                                <h5 class="text-black">from tester 1</h5>
-                            </div>
-                            <div class="col-2 py-auto text-right">
-                                <p class="text-black">2020-09-28</p>
-                            </div>
-                        </div>
-                        <div class="row py-3">
-                            <p class="card-text text-justify" style="font-size:20px;">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt eius placeat consequuntur odio sed, aperiam deserunt commodi esse laudantium libero doloribus ullam facere,laudantium libero doloribus ullam facerelaudantium libero doloribus ullam facere ...
-                            </p>
-                        </div>
-                    </div>
-                </a>
+                <?php
+                include "./includes/components/display_question.php";
+                ?>
+
 
             </section>
 
@@ -93,11 +79,13 @@
 
 </body>
 <script type="text/javascript">
-    <?php
-    if (isset($_GET['reason']) == "passwordnotmatch") {
-        echo "$('#passwordNotMatchModal').modal('show')";
-    }
-    ?>
+    $(document).ready(function () {
+        <?php
+        if (isset($_GET['reason']) == "passwordnotmatch") {
+            echo "$('#passwordNotMatchModal').modal('show');";
+        }
+        ?>
+    });
 </script>
 
 </html>

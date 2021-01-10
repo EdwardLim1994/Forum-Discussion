@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="md-form mb-4">
                                     <i class="fas fa-lock prefix grey-text"></i>
-                                    <input type="password" id="loginPassword" name="loginPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" required>
+                                    <input type="password" id="loginPassword" name="loginPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" autocomplete="on" required>
                                     <label data-error="Password contains more than 6 characters with digits and alphabert" data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your password</label>
                                     <p id="passwordAlert" class="text-danger invisible">Please fill in</p>
                                 </div>
@@ -51,13 +51,13 @@
 
                                 <div class="md-form mb-4">
                                     <i class="fas fa-lock prefix grey-text"></i>
-                                    <input type="password" id="registerPassword" name="registerPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate" required>
+                                    <input type="password" id="registerPassword" name="registerPassword" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate" autocomplete="on" required>
                                     <label data-error="Contains at least 6 characters with combination of digits and alphabert" data-success="Seem OK" for="registerPassword">Your password</label>
                                 </div>
 
                                 <div class="md-form mb-4">
                                     <i class="fas fa-lock prefix grey-text"></i>
-                                    <input type="password" id="passwordConfirm" class="form-control" required>
+                                    <input type="password" id="passwordConfirm" class="form-control" autocomplete="on" required>
                                     <label data-error="Password not match" data-success="Seem OK" for="passwordConfirm" id="passwordConfirmLabel">Confirm password</label>
                                 </div>
                             </div>
