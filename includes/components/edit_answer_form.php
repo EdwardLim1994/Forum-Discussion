@@ -14,6 +14,7 @@
                         <textarea id="editAnswerContent" name="editAnswerContent" class="rounded-lg form-control" rows="5" required></textarea>
                     </div>
                     <input id="editAnswerID" name="answerID" type="number" style="display: none">
+                    <input id="editAnswerQuestionID" name="questionID" type="number" style="display: none">
                 </div>
                 <div class="modal-footer d-flex justify-content-right">
                     <button type="submit" name="answerSubmit" class="btn btn-default text-white">Save</button>

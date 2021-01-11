@@ -12,11 +12,11 @@ if (isset($_POST['editQuestionSubmit'])) {
 
     if (mysqli_query($conn, $sql)) {
 
-        header("location: ../../forum.php?question='$questionID'");
+        header("location: ../../forum.php?question=".$questionID."&reason=editquestionquerysuccess");
         mysqli_close($conn);
         exit();
     } else {
-        header("location: ../../forum.php?question='$questionID'&reason=editquestionqueryfailed");
+        header("location: ../../forum.php?question=".$questionID."&reason=editquestionqueryfailed");
         mysqli_close($conn);
         exit();
     }

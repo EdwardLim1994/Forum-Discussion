@@ -12,6 +12,7 @@
                     Are you sure you want to delete this answer?
                 </div>
                 <input id="deleteAnswerID" name="deleteAnswerID" type="number" style="display: none">
+                <input id="deleteAnswerQuestionID" name="deleteAnswerQuestionID" type="number" style="display: none">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
                     <button type="submit" name="deleteAnswerSubmit" class="btn btn-danger">Yes</button>

@@ -159,8 +159,6 @@ $(document).ready(function () {
     });
 
     $("#loginForm").submit(function () {
-      console.log(loginUsernameFlag);
-      console.log(loginPasswordFlag);
       if(loginUsernameFlag == true && loginPasswordFlag == true){
         return true;
       }else{
@@ -168,5 +166,4 @@ $(document).ready(function () {
       }
     });
   });
-
 });

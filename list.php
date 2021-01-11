@@ -10,9 +10,14 @@
 <body>
 
     <?php
-    if (isset($_GET['reason']) == "passwordnotmatch") {
-        include_once './includes/components/wrong_password_alert.php';
+    if (isset($_GET['reason'])) {
+        if ($_GET['reason'] == "passwordnotmatch") {
+            include_once './includes/components/wrong_password_alert.php';
+        } else if ($_GET['reason'] == "deletequestionquerysuccess") {
+            include_once './includes/components/success_delete_question_alert.php';
+        }
     }
+
     ?>
 
     <?php
@@ -79,12 +84,18 @@
 
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
+
         <?php
-        if (isset($_GET['reason']) == "passwordnotmatch") {
-            echo "$('#passwordNotMatchModal').modal('show');";
+        if (isset($_GET['reason'])) {
+            if ($_GET['reason'] == "passwordnotmatch") {
+                echo "$('#passwordNotMatchModal').modal('show');";
+            } else if ($_GET['reason'] == "deletequestionquerysuccess") {
+                echo "$('#successDeleteQuestionModal').modal('show');";
+            }
         }
         ?>
+
     });
 </script>
 

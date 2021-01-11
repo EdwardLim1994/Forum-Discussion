@@ -6,15 +6,15 @@ if (isset($_POST['deleteQuestionSubmit'])) {
 
     $questionID = $_POST['deleteQuestionID'];
 
-    $sql = "DELETE FROM Question, Answer USING Question INNER JOIN Answer WHERE Question.id = '$questionID' AND Question.id = Answer.question_id";
+    $sql = "DELETE FROM Question WHERE Question.id = '$questionID'";
 
     if (mysqli_query($conn, $sql)) {
 
-        header("location: ../../forum.php?question='$questionID'");
+        header("location: ../../list.php?&reason=deletequestionquerysuccess");
         mysqli_close($conn);
         exit();
     } else {
-        header("location: ../../forum.php?question='$questionID'&reason=deletequestionqueryfailed");
+        header("location: ../../forum.php?question=".$questionID."&reason=deletequestionqueryfailed");
         mysqli_close($conn);
         exit();
     }
