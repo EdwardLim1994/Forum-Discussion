@@ -11,18 +11,18 @@ session_start();
 
         if(mysqli_query($conn, $sql)){
 
-            echo "http://localhost/Forum-Discussion/forum.php?question=".$questionID."&status=success";
+            echo "http://localhost/Forum-Discussion/forum.php?question=".$_SESSION['questionID']."&status=success";
             mysqli_close($conn);
             exit();
         }else{
             mysqli_close($conn);
-            echo "http://localhost/Forum-Discussion/forum.php?question=".$questionID."&status=failed";
+            echo "http://localhost/Forum-Discussion/forum.php?question=".$_SESSION['questionID']."&status=failed";
             exit();
         }
 
     }else{
         
-        echo "http://localhost/Forum-Discussion/forum.php?question=".$questionID."&reason=cannotpostanswer";
+        echo "http://localhost/Forum-Discussion/forum.php?question=".$_SESSION['questionID']."&reason=cannotpostanswer";
         exit();
     }
 

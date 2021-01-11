@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS Answer (
     question_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES User (id),
-    FOREIGN KEY (question_id) REFERENCES Question(id) ON DELETE CASCADE
+    FOREIGN KEY (question_id) REFERENCES Question(id)
 );

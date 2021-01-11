@@ -43,7 +43,7 @@
                         <h4 class="searchResult">Search Result : <span>xxxxxxx</span></h4>
                     </div>
                     <div class="col-6 text-right my-auto">
-                        <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionModal">Post a Question</button>
+                        <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionForm">Post a Question</button>
                     </div>
                 </div>
                 <div class="row">

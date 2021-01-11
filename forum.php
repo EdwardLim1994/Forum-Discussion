@@ -9,30 +9,18 @@
 
 <body>
     <?php
-
-    If(isset($_GET['reason'])){
-        if ($_GET['reason'] == "passwordnotmatch") {
-            include_once './includes/components/wrong_password_alert.php';
-        }else if ($_GET['reason'] == "editanswerqueryfailed") {
-            include_once './includes/components/failed_edit_answer_alert.php';
-        }else if ($_GET['reason'] == "editquestionqueryfailed") {
-            include_once './includes/components/failed_edit_question_alert.php';
-        }else if ($_GET['reason'] == "deleteanswerqueryfailed") {
-            include_once './includes/components/failed_delete_answer_alert.php';
-        }else if ($_GET['reason'] == "deletequestionqueryfailed") {
-            include_once './includes/components/failed_delete_question_alert.php';
-        }
+    if (isset($_GET['reason']) == "passwordnotmatch") {
+        include_once './includes/components/wrong_password_alert.php';
     }
 
-    if(isset($_GET['status'])){
-        if ($_GET['status'] == "success") {
-            include_once './includes/components/success_post_answer_alert.php';
-        } else if ($_GET['status']  == "failed") {
-            include_once './includes/components/failed_post_answer_alert.php';
-        }
+    if(isset($_GET['status']) == "success"){
+        include_once './includes/components/success_post_answer_alert.php';
+    }else if(isset($_GET['status'])  == "failed"){
+        include_once './includes/components/failed_post_answer_alert.php';
     }
 
-
+    
+    
     if (!isset($_SESSION['id'])) {
         include_once './includes/components/post_answer_without_account_alert.php';
     }
@@ -42,31 +30,17 @@
     include_once './includes/header.php';
     ?>
 
-    <?php
-    require_once "./includes/functions/connectDB.php";
-
-    $sql = "SELECT title FROM Question WHERE id = " . $_GET['question'];
-    $question_title = "";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $question_title = $row['title'];
-        }
-    }
-    ?>
-
     <!-- Main Section -->
     <main class="main-section">
         <div class="container">
-            <section class="container stickyContent bg-white position-fixed pt-2">
-                <h1 class="py-1 pb-1"><?php echo $question_title; ?></h1>
-                <div class="row py-3 ">
+            <section class="container stickyContent bg-white position-fixed pt-1">
+                <h1 class="py-2">Question 1</h1>
+                <div class="row py-3 pb-4">
                     <div class="col-6 text-left my-auto">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
                                 <li class="breadcrumb-item"><a href="./list.php">Question</a></li>
-                                <li class="breadcrumb-item active"><?php echo $question_title; ?></li>
+                                <li class="breadcrumb-item active">Question 1</li>
                             </ol>
                         </nav>
                     </div>
@@ -108,34 +82,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         <?php
+        if (isset($_GET['reason']) == "passwordnotmatch") {
+            echo "$('#passwordNotMatchModal').modal('show');";
+        }else if(isset($_GET['status']) == "success"){
+            echo "$('#successPostAnswerModal').modal('show');";
+        }
 
-        if(isset($_GET['reason'])){
-            if ($_GET['reason'] == "passwordnotmatch") {
-                echo "$('#passwordNotMatchModal').modal('show');";
-            }else if ($_GET['reason'] == "editanswerqueryfailed") {
-                echo "$('#failedEditAnswerModal').modal('show');";
-            }else if ($_GET['reason'] == "editquestionqueryfailed") {
-                echo "$('#failedEditQuestionModal').modal('show');";
-            }else if ($_GET['reason'] == "deleteanswerqueryfailed") {
-                echo "$('#failedDeleteAnswerModal').modal('show');";
-            }else if ($_GET['reason'] == "deletequestionqueryfailed") {
-                echo "$('#failedDeleteQuestionModal').modal('show');";
-            }
+
     
+        if(isset($_GET['status'])  == "failed"){
+            echo "$('#failedPostAnswerModal').modal('show');";
         }
-
-        if(isset($_GET['status'])){
-            if ($_GET['status'] == "success") {
-                echo "$('#successPostAnswerModal').modal('show');";
-            } else if ($_GET['status']  == "failed") {
-                echo "$('#failedPostAnswerModal').modal('show');";
-            }
-        }
-
-
         ?>
 
         $("#postAnswerAction").click(function() {
+
             <?php
             if (isset($_SESSION['id'])) {
             ?>
@@ -164,6 +125,7 @@
                         error: function() {
 
                         }
+
                     });
                 }
 
@@ -173,41 +135,6 @@
             }
             ?>
         });
-
-        $(".btn-edit-answer").click(function() {
-            var answer_id = $(this).attr('id');
-            var current_index = answer_id.split('-');
-            var answer = $("#answerContainer-" + current_index[1]).text();
-
-            $("#editAnswerContent").val(answer);
-            $("#editAnswerID").val(current_index[1]);
-        });
-
-        $(".btn-delete-answer").click(function() {
-            var answer_id = $(this).attr('id');
-            var current_index = answer_id.split('-');
-
-            $("#deleteAnswerID").val(current_index[1]);
-        });
-
-        $(".btn-edit-question").click(function() {
-            var question_id = $(this).attr('id');
-            var current_index = question_id.split('-');
-            var questionTitle = $("#questionTitleContainer-" + current_index[1]).text();
-            var questionContent = $("#questionContentContainer-" + current_index[1]).text();
-
-            $("#editQuestionTitle").val(questionTitle);
-            $("#editQuestionContent").val(questionContent);
-            $("#editQuestionID").val(current_index[1]);
-        });
-
-        $(".btn-delete-question").click(function() {
-            var question_id = $(this).attr('id');
-            var current_index = question_id.split('-');
-
-            $("#deleteQuestionID").val(current_index[1]);
-        });
-
     });
 </script>
 
