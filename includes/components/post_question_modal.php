@@ -1,4 +1,4 @@
-<div class="modal fade" id="postQuestionForm" tabindex="-1" role="dialog" aria-labelledby="postQuestionForm" aria-hidden="true">
+<div class="modal fade" id="postQuestionModal" tabindex="-1" role="dialog" aria-labelledby="postQuestionModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="./includes/functions/postQuestion.php" method="POST" id="postQuestionForm">
             <div class="modal-content">
