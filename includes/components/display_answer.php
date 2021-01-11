@@ -1,7 +1,5 @@
 <?php
 
-
-
 $sql = "SELECT 
                 Answer.id as answerID,
                 Answer.answer as answerAnswer,
@@ -32,6 +30,27 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="col-9">
                         <h4 class="card-title"><?php echo $username; ?></h4>
                     </div>
+                    <div class="col-1">
+                        <button class="btn btn-pink">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <?php
+                        if (isset($_SESSION['id']) == $userID) {
+                        ?>
+                            <div class="col-1 mb-4">
+                                <button class="btn btn-default btn-edit-question" id="questionEditBtn-<?php echo $_GET['question']; ?>" data-toggle="modal" data-target="#editQuestionModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="col-1 mb-4">
+                                <button class="btn btn-danger btn-delete-question" id="questionDeleteBtn-<?php echo $_GET['question']; ?>" data-toggle="modal" data-target="#confirmDeleteQuestionModal">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     <div class="col-3 py-auto text-right">
                         <p><?php echo $answerDatetime; ?></p>
                     </div>
