@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS Question (
     postdate DATETIME NOT NULL,
     user_id INT NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES User(id)
+    FOREIGN KEY(user_id) REFERENCES User(id) ON DELETE CASCADE
 );
