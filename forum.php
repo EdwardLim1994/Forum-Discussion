@@ -73,7 +73,7 @@
                     <div class="col-6 text-left my-auto">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
-                                <li class="breadcrumb-item"><a href="./list.php">Question</a></li>
+                                <li class="breadcrumb-item"><a href="./list.php?page=1">Question</a></li>
                                 <li class="breadcrumb-item active"><?php echo $question_title; ?></li>
                             </ol>
                         </nav>
@@ -95,7 +95,9 @@
             </section>
 
             <section class="py-4" id="pagination">
-
+                <?php
+                include_once "./includes/components/pagination_answer.php";
+                ?>
             </section>
 
             <section class="postAnswer container">
@@ -158,7 +160,6 @@
                 var userID = <?php echo $_SESSION["id"] ?>;
 
                 if (content == "") {
-
                     console.log("Empty answer");
                 } else {
                     $.ajax({
@@ -193,8 +194,6 @@
             var current_index = answer_id.split('-');
             var answer = $("#answerContainer-" + current_index[1]).text();
 
-            console.log(answer);
-
             $("#editAnswerContent").val(answer);
             $("#editAnswerID").val(current_index[1]);
             $("#editAnswerQuestionID").val(<?php echo $_GET['question']; ?>);
@@ -228,56 +227,105 @@
 
         $(".btn-vote-answer").click(function() {
 
-            var answer_id = $(this).attr('id');
-            var current_index = answer_id.split('-');
+            <?php
+            if (isset($_SESSION['id'])) {
+            ?>
+                var answer_id = $(this).attr('id');
+                var current_index = answer_id.split('-');
 
-            if ($(this).hasClass("btn-gray")) {
+                if ($(this).hasClass("btn-gray")) {
 
-                $.ajax({
-                    type: "POST",
-                    url: './includes/functions/voteAnswer.php',
-                    data: {
-                        isVoted: 1,
-                        answer_id: current_index[1],
-                        user_id: <?php echo $_SESSION['id'] ?>
-                    },
-                    beforeSend: function() {
+                    $.ajax({
+                        type: "POST",
+                        url: './includes/functions/voteAnswer.php',
+                        data: {
+                            isVoted: 1,
+                            answer_id: current_index[1],
+                            user_id: <?php echo $_SESSION['id'] ?>
+                        },
+                        beforeSend: function() {
 
-                    },
-                    success: function(count) {
-                        $(".btn-vote-answer").removeClass('btn-gray').addClass('btn-pink');
-                        $("#voteCount").empty().text(count);
+                        },
+                        success: function(count) {
+                            $(".btn-vote-answer").removeClass('btn-gray').addClass('btn-pink');
+                            $("#voteCount").empty().text(count);
 
-                    },
-                    error: function() {
+                        },
+                        error: function() {
 
-                    }
-                });
+                        }
+                    });
 
-            } else if ($(this).hasClass("btn-pink")) {
-                $.ajax({
-                    type: "POST",
-                    url: './includes/functions/voteAnswer.php',
-                    data: {
-                        isVoted: 0,
-                        answer_id: current_index[1],
-                        user_id: <?php echo $_SESSION['id'] ?>
-                    },
-                    beforeSend: function() {
+                } else if ($(this).hasClass("btn-pink")) {
+                    $.ajax({
+                        type: "POST",
+                        url: './includes/functions/voteAnswer.php',
+                        data: {
+                            isVoted: 0,
+                            answer_id: current_index[1],
+                            user_id: <?php echo $_SESSION['id'] ?>
+                        },
+                        beforeSend: function() {
 
-                    },
-                    success: function(count) {
-                        $(".btn-vote-answer").removeClass('btn-pink').addClass('btn-gray');
-                        $("#voteCount").empty().text(count);
-                    },
-                    error: function() {}
-                });
-
+                        },
+                        success: function(count) {
+                            $(".btn-vote-answer").removeClass('btn-pink').addClass('btn-gray');
+                            $("#voteCount").empty().text(count);
+                        },
+                        error: function() {}
+                    });
+                }
+            <?php
             }
-
-
+            ?>
         });
 
+        <?php
+
+
+
+        ?>
+
+        <?php
+        if (isset($_GET['page'])) {
+            if ($_GET['page'] == 1) {
+                if ($pageNum == 1) {
+        ?>
+                    $("#previousPageContainer").addClass("disabled");
+                    $("#nextPageContainer").addClass("disabled");
+                <?php
+                } else {
+                ?>
+                    $("#previousPageContainer").addClass("disabled");
+                    $("#nextPageContainer").removeClass("disabled");
+                <?php
+                }
+            } else if ($_GET['page'] == $pageNum) {
+                ?>
+                $("#previousPageContainer").removeClass("disabled");
+                $("#nextPageContainer").addClass("disabled");
+            <?php
+            } else {
+            ?>
+                $("#previousPageContainer").removeClass("disabled");
+                $("#nextPageContainer").removeClass("disabled");
+        <?php
+            }
+        }
+        ?>
+
+        $("#previousPageBtn").click(function() {
+
+            if (!$("#previousPageContainer").hasClass("disabled")) {
+                window.location.replace("http://localhost/Forum-Discussion/forum.php?question=<?php echo $_GET['question']; ?>&page=<?php echo ($_GET["page"] - 1); ?>");
+            }
+        });
+
+        $("#nextPageBtn").click(function() {
+            if (!$("#nextPageContainer").hasClass("disabled")) {
+                window.location.replace("http://localhost/Forum-Discussion/forum.php?question=<?php echo $_GET['question']; ?>&page=<?php echo ($_GET["page"] + 1); ?>");
+            }
+        });
     });
 </script>
 

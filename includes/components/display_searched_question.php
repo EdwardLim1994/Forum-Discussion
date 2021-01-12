@@ -1,6 +1,24 @@
 <?php
 require_once "./includes/functions/connectDB.php";
 
+$rowsPerPage = 15;
+
+$sql = "SELECT * FROM Question";
+
+$result = mysqli_query($conn, $sql);
+
+$rowCount = mysqli_num_rows($result);
+
+$pageNum = ceil($rowCount / $rowsPerPage);
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$thisPageFirstRow = ($page - 1) * $rowsPerPage;
+
 $searchInput = $_GET['search'];
 $sql = "SELECT 
             Question.id as questionID, 
@@ -12,7 +30,8 @@ $sql = "SELECT
         FROM Question 
         LEFT JOIN User 
         ON Question.user_id = User.id
-        WHERE Question.title LIKE '%".$searchInput."%';";
+        WHERE Question.title LIKE '%".$searchInput."%'
+        LIMIT $thisPageFirstRow, $rowsPerPage;";
 
 $result = mysqli_query($conn, $sql);
 
@@ -53,5 +72,5 @@ if (mysqli_num_rows($result) > 0) {
 
 }
 
-mysqli_close($conn);
+
 ?>

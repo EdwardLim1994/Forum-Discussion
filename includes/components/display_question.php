@@ -1,6 +1,25 @@
 <?php
 require_once "./includes/functions/connectDB.php";
 
+$rowsPerPage = 15;
+
+$sql = "SELECT * FROM Question";
+
+$result = mysqli_query($conn, $sql);
+
+$rowCount = mysqli_num_rows($result);
+
+$pageNum = ceil($rowCount / $rowsPerPage);
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$thisPageFirstRow = ($page - 1) * $rowsPerPage;
+
+
 $sql = "SELECT 
             Question.id as questionID, 
             Question.title as questionTitle, 
@@ -10,7 +29,8 @@ $sql = "SELECT
             User.username as userName 
         FROM Question 
         LEFT JOIN User 
-        ON Question.user_id = User.id";
+        ON Question.user_id = User.id
+        LIMIT $thisPageFirstRow, $rowsPerPage";
 
 $result = mysqli_query($conn, $sql);
 
@@ -24,7 +44,7 @@ if (mysqli_num_rows($result) > 0) {
         $username = $row['userName'];
 
 ?>
-        <a class="card my-3" href="./forum.php?question=<?php echo $questionId; ?>">
+        <a class="card my-3" href="./forum.php?question=<?php echo $questionId; ?>&page=1">
             <div class="card-body p-4 px-5">
                 <div class="row">
                     <h2 class="card-title text-black"><?php echo $questionTitle; ?></h2>
@@ -49,6 +69,4 @@ if (mysqli_num_rows($result) > 0) {
     }
     
 }
-
-mysqli_close($conn);
 ?>

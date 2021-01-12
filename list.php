@@ -45,14 +45,14 @@
                 <h1 class="py-2">Questions</h1>
                 <div class="row py-3 pb-4">
                     <div class="col-6 text-left my-auto">
-                        <?php  
-                            if(isset($_GET['search'])){
+                        <?php
+                        if (isset($_GET['search'])) {
                         ?>
                             <h4 class="searchResult">Search :&nbsp;<?php echo $_GET['search']; ?></h4>
                         <?php
-                            }
+                        }
                         ?>
-                        
+
                     </div>
                     <div class="col-6 text-right my-auto">
                         <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionModal">Post a Question</button>
@@ -67,15 +67,15 @@
                     </div>
                 </div>
             </section>
-           
+
             <section class="questionList" id="questionListing">
 
                 <!-- Question -->
                 <?php
 
-                if(isset($_GET['search'])){
+                if (isset($_GET['search'])) {
                     include_once "./includes/components/display_searched_question.php";
-                }else{
+                } else {
                     include_once "./includes/components/display_question.php";
                 }
                 ?>
@@ -84,7 +84,9 @@
             </section>
 
             <section id="questionPagination" class="py-4">
-
+                <?php
+                include_once "./includes/components/pagination_question.php";
+                ?>
             </section>
         </div>
     </main>
@@ -107,17 +109,57 @@
         }
         ?>
 
-        $("#searchBtn").click(function(){
+        $("#searchBtn").click(function() {
             var input = $("#searchInput").val();
 
-            if(input == ""){
+            if (input == "") {
                 console.log("empty input");
-            }else{
-                window.location.replace('http://localhost/Forum-Discussion/list.php?search='+input);
+            } else {
+                window.location.replace('http://localhost/Forum-Discussion/list.php?page=1&search=' + input);
             }
         });
 
-        
+        <?php
+        if (isset($_GET['page'])) {
+            if ($_GET['page'] == 1) {
+                if ($pageNum == 1) {
+        ?>
+                    $("#previousPageContainer").addClass("disabled");
+                    $("#nextPageContainer").addClass("disabled");
+                <?php
+                } else {
+                ?>
+                    $("#previousPageContainer").addClass("disabled");
+                    $("#nextPageContainer").removeClass("disabled");
+                <?php
+                }
+            } else if ($_GET['page'] == $pageNum) {
+                ?>
+                $("#previousPageContainer").removeClass("disabled");
+                $("#nextPageContainer").addClass("disabled");
+            <?php
+            } else {
+            ?>
+                $("#previousPageContainer").removeClass("disabled");
+                $("#nextPageContainer").removeClass("disabled");
+        <?php
+            }
+        }
+
+        ?>
+
+        $("#previousPageBtn").click(function() {
+
+            if (!$("#previousPageContainer").hasClass("disabled")) {
+                window.location.replace("http://localhost/Forum-Discussion/list.php?page=<?php echo ($_GET["page"] - 1); ?>");
+            }
+        });
+
+        $("#nextPageBtn").click(function() {
+            if (!$("#nextPageContainer").hasClass("disabled")) {
+                window.location.replace("http://localhost/Forum-Discussion/list.php?page=<?php echo ($_GET["page"] + 1); ?>");
+            }
+        });
 
     });
 </script>

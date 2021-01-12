@@ -24,20 +24,20 @@ if (isset($_POST['register'])) {
             $_SESSION['id'] = $currentid;
             $_SESSION['username'] = $currentUsername;
 
-            header("location: ../../list.php");
+            header("location: ../../list.php?page=1");
             mysqli_close($conn);
             exit();
         } else {
-            header("location: ../../list.php?reason=getnewdatafailed");
+            header("location: ../../list.php?page=1&reason=getnewdatafailed");
             mysqli_close($conn);
             exit();
         }
     } else {
-        header("location: ../../list.php?reason=cannotinsertuserdataintodatabase");
+        header("location: ../../list.php?page=1&reason=cannotinsertuserdataintodatabase");
         mysqli_close($conn);
         exit();
     }
 } else {
-    header("location: ../../list.php");
+    header("location: ../../list.php?page=1");
     exit();
 }

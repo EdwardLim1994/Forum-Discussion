@@ -24,7 +24,6 @@ if (isset($_GET['question'])) {
             $userID = $row['userID'];
             $username = $row['userName'];
 
-
 ?>
             <div class="card my-3">
                 <div class="card-body p-4 px-5">

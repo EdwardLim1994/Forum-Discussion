@@ -24,23 +24,23 @@ if (isset($_POST['login'])) {
             $_SESSION['id'] = $currentid;
             $_SESSION['username'] = $currentUsername;
 
-            header("location: ../../list.php");
+            header("location: ../../list.php?page=1");
             mysqli_close($conn);
             exit();
 
         } else {
-            header("location: ../../list.php?reason=passwordnotmatch");
+            header("location: ../../list.php?page=1&reason=passwordnotmatch");
             mysqli_close($conn);
             exit();
 
         }
     } else {
-        header("location: ../../list.php?reason=usernotexist");
+        header("location: ../../list.php?page=1&reason=usernotexist");
         mysqli_close($conn);
         exit();
     }
 
 } else {
-    header("location: ../../list.php");
+    header("location: ../../list.php?page=1");
     exit();
 }
