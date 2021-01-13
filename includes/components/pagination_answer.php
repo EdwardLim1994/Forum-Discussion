@@ -1,5 +1,5 @@
-<nav aria-label="Page navigation example">
-    <ul class="pagination pg-blue justify-content-center">
+<nav aria-label="Page navigation example" >
+    <ul class="pagination pg-blue justify-content-center" >
         <li class="page-item" id="previousPageContainer"><a class="page-link" id="previousPageBtn">Previous</a></li>
         <?php
 

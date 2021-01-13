@@ -4,7 +4,10 @@
             <h4 class="text-white">Share your answer</h4>
         </div>
         <div class="col-6 text-right">
-            <button id="postAnswerAction" class="btn btn-primary postAnswerBtn px-5 py-2">Post</button>
+            <button id="postAnswerAction" class="btn btn-primary postAnswerBtn px-xl-5 px-lg-5 px-md-5 px-sm-3 py-3">
+                <span class="textBreak">Post</span>
+                <span class="iconBreak"><i class="fas fa-sticky-note fa-lg"></i></span>
+            </button>
         </div>
     </div>
     <div class="row p-4" style="background-color:#e1e1e1;border-radius:5px 5px 20px 20px;">

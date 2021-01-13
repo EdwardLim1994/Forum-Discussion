@@ -67,13 +67,13 @@
     <!-- Main Section -->
     <main class="main-section">
         <div class="container">
-            <section class="container stickyContent bg-white position-fixed pt-2">
+            <section class="container stickyContent bg-white position-fixed pt-2 coverTopPart">
                 <h1 class="py-1 pb-1"><?php echo $question_title; ?></h1>
                 <div class="row py-3 ">
-                    <div class="col-6 text-left my-auto">
+                    <div class="col text-left my-auto">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
-                                <li class="breadcrumb-item"><a href="./list.php?page=1">Question</a></li>
+                                <li class="breadcrumb-item"><a href="./list.php?page=1">Discussion Forum</a></li>
                                 <li class="breadcrumb-item active"><?php echo $question_title; ?></li>
                             </ol>
                         </nav>
@@ -94,7 +94,7 @@
 
             </section>
 
-            <section class="py-4" id="pagination">
+            <section class="py-1" id="pagination">
                 <?php
                 include_once "./includes/components/pagination_answer.php";
                 ?>
@@ -225,6 +225,10 @@
             $("#deleteQuestionID").val(current_index[1]);
         });
 
+        $.ajax({
+
+        });
+
         $(".btn-vote-answer").click(function() {
 
             <?php
@@ -233,7 +237,7 @@
                 var answer_id = $(this).attr('id');
                 var current_index = answer_id.split('-');
 
-                if ($(this).hasClass("btn-gray")) {
+                if ($("#voteAnswer-"+current_index[1]).hasClass("btn-gray")) {
 
                     $.ajax({
                         type: "POST",
@@ -247,8 +251,8 @@
 
                         },
                         success: function(count) {
-                            $(".btn-vote-answer").removeClass('btn-gray').addClass('btn-pink');
-                            $("#voteCount").empty().text(count);
+                            $("#voteAnswer-"+current_index[1]).removeClass('btn-gray').addClass('btn-pink');
+                            $("#voteCount-"+current_index[1]).empty().text(count);
 
                         },
                         error: function() {
@@ -256,7 +260,7 @@
                         }
                     });
 
-                } else if ($(this).hasClass("btn-pink")) {
+                } else if ($("#voteAnswer-"+current_index[1]).hasClass("btn-pink")) {
                     $.ajax({
                         type: "POST",
                         url: './includes/functions/voteAnswer.php',
@@ -269,45 +273,41 @@
 
                         },
                         success: function(count) {
-                            $(".btn-vote-answer").removeClass('btn-pink').addClass('btn-gray');
-                            $("#voteCount").empty().text(count);
+                            $("#voteAnswer-"+current_index[1]).removeClass('btn-pink').addClass('btn-gray');
+                            $("#voteCount-"+current_index[1]).empty().text(count);
                         },
                         error: function() {}
                     });
-                }
-            <?php
+                <?php
+            } else {
+                ?>
+                    console.log("You will need an aacount to like");
+                <?php
             }
-            ?>
+                ?>
+                }
         });
 
-        <?php
 
-
-
-        ?>
 
         <?php
         if (isset($_GET['page'])) {
             if ($_GET['page'] == 1) {
                 if ($pageNum == 1) {
-        ?>
-                    $("#previousPageContainer").addClass("disabled");
+        ?> $("#previousPageContainer").addClass("disabled");
                     $("#nextPageContainer").addClass("disabled");
                 <?php
                 } else {
-                ?>
-                    $("#previousPageContainer").addClass("disabled");
+                ?> $("#previousPageContainer").addClass("disabled");
                     $("#nextPageContainer").removeClass("disabled");
                 <?php
                 }
             } else if ($_GET['page'] == $pageNum) {
-                ?>
-                $("#previousPageContainer").removeClass("disabled");
+                ?> $("#previousPageContainer").removeClass("disabled");
                 $("#nextPageContainer").addClass("disabled");
             <?php
             } else {
-            ?>
-                $("#previousPageContainer").removeClass("disabled");
+            ?> $("#previousPageContainer").removeClass("disabled");
                 $("#nextPageContainer").removeClass("disabled");
         <?php
             }

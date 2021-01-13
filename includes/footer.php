@@ -3,7 +3,7 @@
         <div class="col-md-12">
 
             <!-- Social Link on Bottom -->
-            <div class="mb-4 pt-4 flex-center bottomLink">
+            <div class="mb-3 pt-3 flex-center bottomLink">
                 <a class="whatsappLink">
                     <i class="fab fa-whatsapp a-lg mr-md-5 mr-3 fa-2x"></i>
                 </a>
@@ -21,7 +21,7 @@
                 </a>
             </div>
         </div>
-        <div class="footer-copyright text-center py-3">
+        <div class="footer-copyright text-center py-2">
             <a href="https://www.nightcatdigitalsolutions.com">NIGHTCAT DIGITAL SOLUTIONS © 2013 -
                 <span id="latestYear"></span>. ALL RIGHTS RESERVED</a>
         </div>

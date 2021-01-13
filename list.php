@@ -41,9 +41,9 @@
     <!-- Main Section -->
     <main class="main-section">
         <div class="container">
-            <section class="container stickyContent bg-white position-fixed ">
-                <h1 class="py-2">Questions</h1>
-                <div class="row py-3 pb-4">
+            <section class="container stickyContent bg-white position-fixed coverTopPart" >
+                <h1 class="py-1">Discussion Forum</h1>
+                <div class="row py-2 pb-3">
                     <div class="col-6 text-left my-auto">
                         <?php
                         if (isset($_GET['search'])) {
@@ -55,14 +55,20 @@
 
                     </div>
                     <div class="col-6 text-right my-auto">
-                        <button class="btn btn-primary py-3 px-5 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionModal">Post a Question</button>
+                        <button class="btn btn-primary py-3 px-xl-5 px-lg-5 px-md-5 px-sm-3 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionModal">
+                            <span class="textBreak">Post a Question</span>
+                            <span class="iconBreak"><i class="fas fa-plus"></i></span>
+                        </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control px-5 py-4 rounded-lg-left searchInput" id="searchInput" placeholder="Search....." aria-label="Search" aria-describedby="searchBtn">
+                        <input type="text" class="form-control px-xl-5 px-lg-5 px-md-5 px-sm-3 py-4 rounded-lg-left searchInput" id="searchInput" placeholder="Search....." aria-label="Search" aria-describedby="searchBtn">
                         <div class="input-group-append">
-                            <button class="btn btn-primary m-0 px-5 py-3 rounded-lg searchBtn" type="button" id="searchBtn">Search</button>
+                            <button class="btn btn-primary m-0 px-xl-5 px-lg-5 px-md-5 px-sm-3 py-3 rounded-lg searchBtn" type="button" id="searchBtn">
+                                <span class="textBreak">Search</span>
+                                <span class="iconBreak"><i class="fas fa-search fa-lg"></i></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +119,7 @@
             var input = $("#searchInput").val();
 
             if (input == "") {
-                console.log("empty input");
+                window.location.replace('http://localhost/Forum-Discussion/list.php?page=1');
             } else {
                 window.location.replace('http://localhost/Forum-Discussion/list.php?page=1&search=' + input);
             }

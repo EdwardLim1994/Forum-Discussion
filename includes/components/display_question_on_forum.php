@@ -28,34 +28,33 @@ if (isset($_GET['question'])) {
             <div class="card my-3">
                 <div class="card-body p-4 px-5">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12">
                             <h2 class="card-title text-black" id="questionTitleContainer-<?php echo $questionID; ?>"><?php echo $questionTitle; ?></h2>
-                        </div>
-                        <?php
-                        if (isset($_SESSION['id']) == $userID) {
-                        ?>
-                            <div class="col-1 mb-4">
-                                <button class="btn btn-default btn-edit-question" id="questionEditBtn-<?php echo $questionID; ?>" data-toggle="modal" data-target="#editQuestionModal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="col-1 mb-4">
-                                <button class="btn btn-danger btn-delete-question" id="questionDeleteBtn-<?php echo $questionID; ?>" data-toggle="modal" data-target="#confirmDeleteQuestionModal">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="row">
-                        <div class="col-9 py-auto text-black">
                             <p class="text-black">from <?php echo $username; ?></p>
+                            <p class="text-black dateSize"><?php echo $questionDatetime; ?></p>
                         </div>
-                        <div class="col-3 py-auto text-right">
-                            <p class="text-black"><?php echo $questionDatetime; ?></p>
+                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+                            <div class="row">
+                                <?php
+                                if (isset($_SESSION['id']) == $userID) {
+                                ?>
+                                    <div class="col-6 text-center">
+                                        <button class="btn btn-default btn-edit-question p-2 px-3" id="questionEditBtn-<?php echo $questionID; ?>" data-toggle="modal" data-target="#editQuestionModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <button class="btn btn-danger btn-delete-question p-2 px-3" id="questionDeleteBtn-<?php echo $questionID; ?>" data-toggle="modal" data-target="#confirmDeleteQuestionModal">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
+
                     <div class="row py-3">
                         <p class="card-text text-justify" id="questionContentContainer-<?php echo $questionID; ?>" style="font-size:20px;"><?php echo $questionContent; ?></p>
                     </div>

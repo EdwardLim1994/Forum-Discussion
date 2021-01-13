@@ -2,10 +2,19 @@
 @import '_main-section';
 
 @media (max-width: 576px) {
+    .textBreak {
+        display: none;
+    }
+
+    .iconBreak {
+        display: inline-block;
+    }
+
 
     .main-section {
-        padding-top: 180px;
-        padding-bottom: 80px;
+        padding-top: 150px;
+        padding-bottom: 30px;
+
 
         .navbar {
             .navbar-brand {
@@ -17,9 +26,19 @@
 
 @media (min-width: 576px) {
 
+    .textBreak {
+        display: none;
+    }
+
+    .iconBreak {
+        display: inline-block;
+    }
+
     .main-section {
         padding-top: 150px;
-        padding-bottom: 80px;
+        padding-bottom: 30px;
+
+
 
         .navbar {
             .navbar-brand {
@@ -30,9 +49,20 @@
 }
 
 @media (min-width: 768px) {
+    .textBreak {
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+
+    }
+
     .main-section {
         padding-top: 190px;
         padding-bottom: 80px;
+
+
 
         .navbar {
             .navbar-brand {
@@ -44,9 +74,21 @@
 
 @media (min-width: 992px) {
 
+    .textBreak {
+
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+
+    }
+
     .main-section {
         padding-top: 160px;
         padding-bottom: 100px;
+
+
 
         .navbar {
             .navbar-brand {
@@ -60,9 +102,21 @@
 
 @media (min-width: 1200px) {
 
+    .textBreak {
+
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+
+    }
+
+
     .main-section {
         padding-top: 180px;
         padding-bottom: 100px;
+
 
         .navbar {
             .navbar-brand {

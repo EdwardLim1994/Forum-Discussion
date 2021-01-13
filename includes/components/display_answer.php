@@ -45,61 +45,70 @@ if (mysqli_num_rows($result) > 0) {
         $username = $row['userName'];
 
 ?>
-<div class="card my-3">
-    <div class="card-body p-4 px-5">
-        <div class="row">
-            <div class="col-8">
-                <h4 class="card-title"><?php echo $username; ?></h4>
-                <p><?php echo $answerDatetime; ?></p>
+        <div class="card my-3">
+            <div class="card-body p-4 px-5">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12">
+                        <h4 class="card-title"><?php echo $username; ?></h4>
+                        <p class="dateSize"><?php echo $answerDatetime; ?></p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                        <div class="row">
+                            <?php
+                            $vote_sql = "SELECT COUNT(*) as count, isVoted FROM Vote WHERE answer_id = '$answerId' AND IsVoted = true";
+                            $vote_result = mysqli_query($conn, $vote_sql);
+                            if (mysqli_num_rows($vote_result) > 0) {
+                                while ($vote_row = mysqli_fetch_assoc($vote_result)) {
+                                    $voteCount = $vote_row['count'];
+                                    $isVoted = $vote_row['isVoted'];
+
+                                    if ($isVoted == false) {
+                            ?>
+                                        <div class="col-4 text-center">
+                                            <button class="btn btn-gray btn-vote-answer p-2" id="voteAnswer-<?php echo $answerId; ?>">
+                                                <i class="fas fa-heart"><span id="voteCount-<?php echo $answerId; ?>">&nbsp;&nbsp;<?php echo $voteCount; ?></span></i>
+                                            </button>
+                                        </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="col-4 text-center">
+                                            <button class="btn btn-pink btn-vote-answer p-2" id="voteAnswer-<?php echo $answerId; ?>">
+                                                <i class="fas fa-heart"><span id="voteCount-<?php echo $answerId; ?>">&nbsp;&nbsp;<?php echo $voteCount; ?></span></i>
+                                            </button>
+                                        </div>
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
+                            <?php
+                            if (isset($_SESSION['id']) == $userID) {
+                            ?>
+                                <div class="col-4 text-center">
+                                    <button class="btn btn-default btn-edit-answer p-2 px-3" id="answerEditBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#editAnswerModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <button class="btn btn-danger btn-delete-answer p-2 px-3" id="answerDeleteBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#confirmDeleteAnswerModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row py-3">
+                    <p class="card-text text-justify" id="answerContainer-<?php echo $answerId; ?>" style="font-size:16px;"><?php echo $answerAnswer; ?></p>
+                </div>
             </div>
-            <?php
-            if (isset($_SESSION['id']) == $userID) {
-            ?>
-                <div class="col-1 mb-auto mb-4">
-                    <button class="btn btn-default btn-edit-answer" id="answerEditBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#editAnswerModal">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </div>
-                <div class="col-1 mb-auto mb-4">
-                    <button class="btn btn-danger btn-delete-answer" id="answerDeleteBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#confirmDeleteAnswerModal">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-            <?php
-            } else {
-            ?>
-                <div class="col-1 mb-auto mb-4"></div>
-                <div class="col-1 mb-auto mb-4"></div>
-            <?php
-            }
-            ?>
-
-            <?php
-            $vote_sql = "SELECT COUNT(*) as count FROM Vote WHERE answer_id = '$answerId' AND IsVoted = true";
-            $vote_result = mysqli_query($conn, $vote_sql);
-            if (mysqli_num_rows($vote_result) > 0) {
-                while ($vote_row = mysqli_fetch_assoc($vote_result)) {
-                    $voteCount = $vote_row['count'];
-            ?>
-                    <div class="col-1 mb-auto mb-4">
-                        <button class="btn btn-gray btn-vote-answer" id="voteAnswer-<?php echo $answerId; ?>">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="col-1 text-center my-auto mb-4">
-                        <p id="voteCount"><?php echo $voteCount; ?></p>
-                    </div>
-            <?php
-                }
-            }
-            ?>
-
         </div>
-        <div class="row py-3">
-            <p class="card-text text-justify" id="answerContainer-<?php echo $answerId; ?>" style="font-size:16px;"><?php echo $answerAnswer; ?></p>
-        </div>
-    </div>
-</div>
 <?php
 
     }
@@ -117,4 +126,3 @@ if (isset($_SESSION['id']) == $userID) {
     include_once "./includes/components/confirm_delete_answer_alert.php";
 }
 ?>
-

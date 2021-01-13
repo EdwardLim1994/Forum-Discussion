@@ -47,20 +47,15 @@ if (mysqli_num_rows($result) > 0) {
 ?>
         <a class="card my-3" href="./forum.php?question=<?php echo $questionId; ?>">
             <div class="card-body p-4 px-5">
-                <div class="row">
+            <div class="row">
                     <h2 class="card-title text-black"><?php echo $questionTitle; ?></h2>
+                    <p class="text-black">from <?php echo $username; ?></p>
+                    <p class="text-black dateSize"><?php echo $questionDatetime; ?></p>
+                    
                 </div>
-                <div class="row">
-                    <div class="col-9 py-auto text-black">
-                        <p class="text-black">from <?php echo $username; ?></p>
-                    </div>
 
-                    <div class="col-3 py-auto text-right">
-                        <p class="text-black"><?php echo $questionDatetime; ?></p>
-                    </div>
-                </div>
                 <div class="row py-3">
-                    <p class="card-text text-justify" style="font-size:20px;">
+                    <p class="card-text text-justify questionContent">
                         <?php echo $questionContent; ?>
                     </p>
                 </div>
