@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- include necessary files -->
     <?php
     include_once './includes/head.php';
     ?>
@@ -9,6 +10,7 @@
 
 <body>
 
+    <!-- include alert modal when failed occur -->
     <?php
     if (isset($_GET['reason'])) {
         if ($_GET['reason'] == "passwordnotmatch") {
@@ -17,14 +19,14 @@
             include_once './includes/components/success_delete_question_alert.php';
         }
     }
-
     ?>
 
+    <!-- Include Header Part -->
     <?php
     include_once './includes/header.php';
     ?>
 
-
+    
     <?php
     if (isset($_SESSION['id'])) {
         // if logined
@@ -41,7 +43,7 @@
     <!-- Main Section -->
     <main class="main-section">
         <div class="container">
-            <section class="container stickyContent bg-white position-fixed coverTopPart" >
+            <section class="container stickyContent bg-white position-fixed coverTopPart">
                 <h1 class="py-1">Discussion Forum</h1>
                 <div class="row py-2 pb-3">
                     <div class="col-6 text-left my-auto">
@@ -52,8 +54,8 @@
                         <?php
                         }
                         ?>
-
                     </div>
+                    <!-- Post Question Button -->
                     <div class="col-6 text-right my-auto">
                         <button class="btn btn-primary py-3 px-xl-5 px-lg-5 px-md-5 px-sm-3 text-white postQuestionBtn" data-toggle="modal" data-target="#postQuestionModal">
                             <span class="textBreak">Post a Question</span>
@@ -62,6 +64,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    <!-- Search Input -->
                     <div class="input-group mb-3">
                         <input type="text" class="form-control px-xl-5 px-lg-5 px-md-5 px-sm-3 py-4 rounded-lg-left searchInput" id="searchInput" placeholder="Search....." aria-label="Search" aria-describedby="searchBtn">
                         <div class="input-group-append">
@@ -75,18 +78,14 @@
             </section>
 
             <section class="questionList" id="questionListing">
-
                 <!-- Question -->
                 <?php
-
                 if (isset($_GET['search'])) {
                     include_once "./includes/components/display_searched_question.php";
                 } else {
                     include_once "./includes/components/display_question.php";
                 }
                 ?>
-
-
             </section>
 
             <section id="questionPagination" class="py-4">
@@ -151,7 +150,6 @@
         <?php
             }
         }
-
         ?>
 
         $("#previousPageBtn").click(function() {

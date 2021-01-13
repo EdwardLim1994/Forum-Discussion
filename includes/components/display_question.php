@@ -1,14 +1,12 @@
 <?php
 require_once "./includes/functions/connectDB.php";
 
+//Set Pagination Logic
 $rowsPerPage = 15;
 
 $sql = "SELECT * FROM Question";
-
 $result = mysqli_query($conn, $sql);
-
 $rowCount = mysqli_num_rows($result);
-
 $pageNum = ceil($rowCount / $rowsPerPage);
 
 if (isset($_GET['page'])) {
@@ -19,7 +17,7 @@ if (isset($_GET['page'])) {
 
 $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
-
+// SQL Command
 $sql = "SELECT 
             Question.id as questionID, 
             Question.title as questionTitle, 
@@ -34,6 +32,7 @@ $sql = "SELECT
 
 $result = mysqli_query($conn, $sql);
 
+// When Successfully Retrieve Data from Database
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $questionId = $row['questionID'];
@@ -44,6 +43,7 @@ if (mysqli_num_rows($result) > 0) {
         $username = $row['userName'];
 
 ?>
+        <!-- Question Card -->
         <a class="card my-3" href="./forum.php?question=<?php echo $questionId; ?>&page=1">
             <div class="card-body p-4 px-5">
                 <div class="row">
@@ -62,5 +62,10 @@ if (mysqli_num_rows($result) > 0) {
         </a>
 <?php
     }
+}else{
+    ?>
+        <!-- When there is no question inside database -->
+        <h4 class="text-center">No data</h4>
+    <?php
 }
 ?>

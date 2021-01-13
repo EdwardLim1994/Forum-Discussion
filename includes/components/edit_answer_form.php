@@ -13,6 +13,8 @@
                         <label for="editAnswerContent">Content</label>
                         <textarea id="editAnswerContent" name="editAnswerContent" class="rounded-lg form-control" rows="5" required></textarea>
                     </div>
+
+                    <!-- Store necessary data ready to be posted -->
                     <input id="editAnswerID" name="answerID" type="number" style="display: none">
                     <input id="editAnswerQuestionID" name="questionID" type="number" style="display: none">
                 </div>

@@ -17,6 +17,8 @@
                         <label for="editQuestionContent">Content</label>
                         <textarea id="editQuestionContent" name="editQuestionContent" class="rounded-lg form-control" rows="5" required></textarea>
                     </div>
+                    
+                    <!-- Store necessary data ready to be posted -->
                     <input id="editQuestionID" name="editQuestionID" type="number" style="display: none">
                 </div>
                 <div class="modal-footer d-flex justify-content-right">

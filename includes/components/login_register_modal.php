@@ -20,6 +20,8 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+
+                        <!-- Login Form -->
                         <form action="./includes/functions/login.inc.php" method="POST" id="loginForm">
                             <div class="modal-body">
                                 <div class="md-form mb-5">
@@ -38,10 +40,11 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary save" name="login">Login</button>
                             </div>
-                            <input name="currentUrl" value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" type="text" style="display:none;">
                         </form>
                     </div>
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+
+                        <!-- Registration Form -->
                         <form action="./includes/functions/register.inc.php" method="POST" id="registerForm">
                             <div class="modal-body pb-4">
                                 <div class="md-form mb-5">

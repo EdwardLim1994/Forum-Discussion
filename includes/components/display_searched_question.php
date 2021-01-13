@@ -1,14 +1,12 @@
 <?php
 require_once "./includes/functions/connectDB.php";
 
+//Set Pagination Logic
 $rowsPerPage = 15;
 
 $sql = "SELECT * FROM Question";
-
 $result = mysqli_query($conn, $sql);
-
 $rowCount = mysqli_num_rows($result);
-
 $pageNum = ceil($rowCount / $rowsPerPage);
 
 if (isset($_GET['page'])) {
@@ -19,7 +17,10 @@ if (isset($_GET['page'])) {
 
 $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
+//Set Search Keyword input
 $searchInput = $_GET['search'];
+
+//SQL Command
 $sql = "SELECT 
             Question.id as questionID, 
             Question.title as questionTitle, 
@@ -35,6 +36,8 @@ $sql = "SELECT
 
 $result = mysqli_query($conn, $sql);
 
+
+// When Successfully Retrieve Data from Database
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $questionId = $row['questionID'];
@@ -45,6 +48,7 @@ if (mysqli_num_rows($result) > 0) {
         $username = $row['userName'];
 
 ?>
+        <!-- Searched Question Card -->
         <a class="card my-3" href="./forum.php?question=<?php echo $questionId; ?>">
             <div class="card-body p-4 px-5">
             <div class="row">
@@ -64,7 +68,10 @@ if (mysqli_num_rows($result) > 0) {
 <?php
     }
 }else{
-
+    ?>
+        <!-- When no related question is found -->
+        <h4 class="text-center">Not Found</h4>
+    <?php
 }
 
 

@@ -14,7 +14,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                     <button href="" type="submit" name="logoutBtn" class="btn btn-danger">Logout</a>
-                    <input name="currentUrl" value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" type="text" style="display:none;">
                 </div>
             </form>
         </div>

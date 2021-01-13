@@ -2,14 +2,17 @@
 <html lang="en">
 
 <head>
+
+    <!-- include necessary files -->
     <?php
     include_once './includes/head.php';
     ?>
 </head>
 
 <body>
-    <?php
 
+    <!-- include alert modal when failed occur -->
+    <?php
     if (isset($_GET['reason'])) {
         if ($_GET['reason'] == "passwordnotmatch") {
             include_once './includes/components/wrong_password_alert.php';
@@ -32,25 +35,27 @@
         }
     }
 
-    include_once './includes/components/success_post_answer_alert.php';
-
+    //Include Success Alert when successfully post answer or Failed Alert when failed to post answer   
     if (isset($_GET['status'])) {
         if ($_GET['status'] == "success") {
+            include_once './includes/components/success_post_answer_alert.php';
         } else if ($_GET['status']  == "failed") {
             include_once './includes/components/failed_post_answer_alert.php';
         }
     }
 
-
+    //Include no account alert if user haven't login
     if (!isset($_SESSION['id'])) {
         include_once './includes/components/no_account_alert.php';
     }
     ?>
 
+    <!-- Include Backend Communication Failure Alert -->
     <?php
-    include_once './includes/components/database_failure.php';
+    include_once './includes/components/database_failure_modal.php';
     ?>
 
+    <!-- Include Header Part -->
     <?php
     include_once './includes/header.php';
     ?>
@@ -58,6 +63,7 @@
     <?php
     require_once "./includes/functions/connectDB.php";
 
+    //Perform Database Select to Set Title
     $sql = "SELECT title FROM Question WHERE id = " . $_GET['question'];
     $question_title = "";
     $result = mysqli_query($conn, $sql);
@@ -281,10 +287,7 @@
             <?php
             }
             ?>
-
         });
-
-
 
         <?php
         if (isset($_GET['page'])) {
@@ -311,7 +314,6 @@
         ?>
 
         $("#previousPageBtn").click(function() {
-
             if (!$("#previousPageContainer").hasClass("disabled")) {
                 window.location.replace("http://localhost/Forum-Discussion/forum.php?question=<?php echo $_GET['question']; ?>&page=<?php echo ($_GET["page"] - 1); ?>");
             }
