@@ -83,7 +83,7 @@ $(document).ready(function () {
   });
 
   var loginPasswordFlag;
-  $("#loginPassword").on("focusout", function(){
+  $("#loginPassword").on("focusout", function () {
     var password = $("#loginPassword").val();
 
     if (password == "") {
@@ -91,11 +91,11 @@ $(document).ready(function () {
       loginPasswordFlag = false;
     }
 
-    if(/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test(password) == true){
+    if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test(password) == true) {
       $("#loginPasswordLabel").attr("data-error", "Password contains more than 6 characters with digits and alphabert");
       $("#loginPassword").removeClass("invalid").addClass("valid");
       loginPasswordFlag = true;
-    }else{
+    } else {
       $("#loginPasswordLabel").attr("data-error", "Password contains more than 6 characters with digits and alphabert");
       $("#loginPassword").removeClass("valid").addClass("invalid");
       loginPasswordFlag = false;
@@ -119,17 +119,16 @@ $(document).ready(function () {
           $("#loginUsername").removeClass("valid").addClass("invalid");
           loginUsernameFlag = false;
 
-          $("#loginPassword").on("keyup focusout", function(){
+          $("#loginPassword").on("keyup focusout", function () {
             if ($("#loginPassword").val() == "") {
               $("#loginPasswordLabel").attr("data-error", "Password contains more than 6 characters with digits and alphabert");
               $("#loginPassword").removeClass("invalid").removeClass("valid");
 
-            } else{
+            } else {
               $("#loginPasswordLabel").attr("data-error", "Cannot check password as there is no registered user in database");
               $("#loginPassword").removeClass("valid").addClass("invalid");
             }
           });
-
 
         } else {
           $.each(data, function (index, item) {
@@ -159,9 +158,9 @@ $(document).ready(function () {
     });
 
     $("#loginForm").submit(function () {
-      if(loginUsernameFlag == true && loginPasswordFlag == true){
+      if (loginUsernameFlag == true && loginPasswordFlag == true) {
         return true;
-      }else{
+      } else {
         return false;
       }
     });

@@ -32,9 +32,10 @@
         }
     }
 
+    include_once './includes/components/success_post_answer_alert.php';
+
     if (isset($_GET['status'])) {
         if ($_GET['status'] == "success") {
-            include_once './includes/components/success_post_answer_alert.php';
         } else if ($_GET['status']  == "failed") {
             include_once './includes/components/failed_post_answer_alert.php';
         }
@@ -42,8 +43,12 @@
 
 
     if (!isset($_SESSION['id'])) {
-        include_once './includes/components/post_answer_without_account_alert.php';
+        include_once './includes/components/no_account_alert.php';
     }
+    ?>
+
+    <?php
+    include_once './includes/components/database_failure.php';
     ?>
 
     <?php
@@ -159,8 +164,8 @@
                 var questionID = <?php echo $_GET["question"]; ?>;
                 var userID = <?php echo $_SESSION["id"] ?>;
 
-                if (content == "") {
-                    console.log("Empty answer");
+                if (content == "" || content == "Cannot post empty answer") {
+                    $("#answerContent").val("Cannot post empty answer");
                 } else {
                     $.ajax({
                         type: "POST",
@@ -170,14 +175,11 @@
                             questionID: questionID,
                             userID: userID
                         },
-                        beforeSend: function() {
-
-                        },
                         success: function(data) {
                             window.location.replace(data);
                         },
                         error: function() {
-
+                            $('#databaseFailureModal').modal('show');
                         }
                     });
                 }
@@ -225,10 +227,6 @@
             $("#deleteQuestionID").val(current_index[1]);
         });
 
-        $.ajax({
-
-        });
-
         $(".btn-vote-answer").click(function() {
 
             <?php
@@ -237,7 +235,7 @@
                 var answer_id = $(this).attr('id');
                 var current_index = answer_id.split('-');
 
-                if ($("#voteAnswer-"+current_index[1]).hasClass("btn-gray")) {
+                if ($("#voteAnswer-" + current_index[1]).hasClass("btn-gray")) {
 
                     $.ajax({
                         type: "POST",
@@ -247,20 +245,18 @@
                             answer_id: current_index[1],
                             user_id: <?php echo $_SESSION['id'] ?>
                         },
-                        beforeSend: function() {
-
-                        },
                         success: function(count) {
-                            $("#voteAnswer-"+current_index[1]).removeClass('btn-gray').addClass('btn-pink');
-                            $("#voteCount-"+current_index[1]).empty().text(count);
+                            $("#voteAnswer-" + current_index[1]).removeClass('btn-gray').addClass('btn-pink');
+                            $("#voteCount-" + current_index[1]).empty().text(count);
 
                         },
                         error: function() {
-
+                            $('#databaseFailureModal').modal('show');
+                
                         }
                     });
 
-                } else if ($("#voteAnswer-"+current_index[1]).hasClass("btn-pink")) {
+                } else if ($("#voteAnswer-" + current_index[1]).hasClass("btn-pink")) {
                     $.ajax({
                         type: "POST",
                         url: './includes/functions/voteAnswer.php',
@@ -269,23 +265,23 @@
                             answer_id: current_index[1],
                             user_id: <?php echo $_SESSION['id'] ?>
                         },
-                        beforeSend: function() {
-
-                        },
                         success: function(count) {
-                            $("#voteAnswer-"+current_index[1]).removeClass('btn-pink').addClass('btn-gray');
-                            $("#voteCount-"+current_index[1]).empty().text(count);
+                            $("#voteAnswer-" + current_index[1]).removeClass('btn-pink').addClass('btn-gray');
+                            $("#voteCount-" + current_index[1]).empty().text(count);
                         },
-                        error: function() {}
+                        error: function() {
+                            $('#databaseFailureModal').modal('show');
+                        }
                     });
-                <?php
-            } else {
-                ?>
-                    console.log("You will need an aacount to like");
-                <?php
-            }
-                ?>
                 }
+            <?php
+            } else {
+            ?>
+                $('#cannotPostAnswerModal').modal('show');
+            <?php
+            }
+            ?>
+
         });
 
 

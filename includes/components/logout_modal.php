@@ -10,10 +10,13 @@
             <div class="modal-body">
                 Are you sure you want to logout?
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                <a href="./includes/functions/logout.inc.php" type="button" class="btn btn-danger">Logout</a>
-            </div>
+            <form action="./includes/functions/logout.inc.php" method="POST">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button href="" type="submit" name="logoutBtn" class="btn btn-danger">Logout</a>
+                    <input name="currentUrl" value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" type="text" style="display:none;">
+                </div>
+            </form>
         </div>
     </div>
 </div>

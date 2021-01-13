@@ -54,6 +54,28 @@ if (mysqli_num_rows($result) > 0) {
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
                         <div class="row">
+
+                        <?php
+                            if (isset($_SESSION['id']) == $userID) {
+                            ?>
+                                <div class="col-4 text-center">
+                                    <button class="btn btn-default btn-edit-answer p-2 px-3" id="answerEditBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#editAnswerModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <button class="btn btn-danger btn-delete-answer p-2 px-3" id="answerDeleteBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#confirmDeleteAnswerModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            <?php
+                            }else{
+                            ?>
+                            <div class="col-4 text-center"></div>
+                            <div class="col-4 text-center"></div>
+                            <?php
+                            }
+                            ?>
                             <?php
                             $vote_sql = "SELECT COUNT(*) as count, isVoted FROM Vote WHERE answer_id = '$answerId' AND IsVoted = true";
                             $vote_result = mysqli_query($conn, $vote_sql);
@@ -82,22 +104,7 @@ if (mysqli_num_rows($result) > 0) {
                                 }
                             }
                             ?>
-                            <?php
-                            if (isset($_SESSION['id']) == $userID) {
-                            ?>
-                                <div class="col-4 text-center">
-                                    <button class="btn btn-default btn-edit-answer p-2 px-3" id="answerEditBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#editAnswerModal">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <button class="btn btn-danger btn-delete-answer p-2 px-3" id="answerDeleteBtn-<?php echo $answerId; ?>" data-toggle="modal" data-target="#confirmDeleteAnswerModal">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            <?php
-                            }
-                            ?>
+
 
                         </div>
                     </div>

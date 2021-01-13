@@ -38,6 +38,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary save" name="login">Login</button>
                             </div>
+                            <input name="currentUrl" value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" type="text" style="display:none;">
                         </form>
                     </div>
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
@@ -65,6 +66,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" name="register" class="btn btn-primary save">Register</button>
                             </div>
+                            <input name="currentUrl" value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" type="text" style="display:none;">
                         </form>
                     </div>
                 </div>
