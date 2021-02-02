@@ -1,3 +1,94 @@
 @import '_header';
-@import '_questionList';
 @import '_footer';
+
+@media (max-width: 576px) {
+
+    .textBreak {
+        display: none;
+    }
+
+    .iconBreak {
+        display: inline-block;
+    }
+
+    header {
+        .logo {
+            width: 70%;
+        }
+    }
+
+    main {}
+}
+
+@media (min-width: 576px) {
+
+    .textBreak {
+        display: none;
+    }
+
+    .iconBreak {
+        display: inline-block;
+    }
+
+    header {
+        .logo {
+            width: 65%;
+        }
+    }
+
+    main {}
+}
+
+@media (min-width: 768px) {
+    .textBreak {
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+    }
+
+    header {
+        .logo {
+            width: 50%;
+        }
+    }
+
+    main {}
+}
+
+@media (min-width: 992px) {
+    .textBreak {
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+    }
+
+    header {
+        .logo {
+            width: 40%;
+        }
+    }
+
+    main {}
+}
+
+@media (min-width: 1200px) {
+    .textBreak {
+        display: inline-block;
+    }
+
+    .iconBreak {
+        display: none;
+    }
+
+    header {
+        .logo {
+            width: 30%;
+        }
+    }
+
+    main {}
+}
