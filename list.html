@@ -50,8 +50,9 @@
                             </a>
                         </div>
                         <div class="col-4 text-right my-auto">
-                            <button class="btn btn-danger login-register-btn login-register">
-                                <span class="textBreak">Login/Register</span>
+                            <button class="btn btn-danger login-register-btn" data-toggle="modal"
+                                data-target="#loginRegisterModal">
+                                <span class="textBreak">Login/Register or Logout</span>
                                 <span class="iconBreak"><i class="fas fa-sign-in-alt"></i></span>
                             </button>
                         </div>
@@ -65,7 +66,8 @@
                             <h4>Question List</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <button class="btn btn-primary p-2 px-lg-5 px-md-4 post-question">
+                            <button class="btn btn-primary p-2 px-lg-5 px-md-4" data-toggle="modal"
+                                data-target="#postQuestionModal">
                                 <span class="textBreak">Post a Question</span>
                                 <span class="iconBreak"><i class="fas fa-sign-in-alt"></i></span>
                             </button>
@@ -77,7 +79,7 @@
                                 <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                                     aria-describedby="searchQuestion">
                                 <div class="input-group-append">
-                                    <button class="btn btn-md btn-primary search m-0 px-lg-5 px-md-3" type="button"
+                                    <button class="btn btn-md btn-primary m-0 px-lg-5 px-md-3" type="button"
                                         id="searchQuestion">
                                         <span class="textBreak">Search</span>
                                         <span class="iconBreak"><i class="fas fa-search"></i></span>
@@ -89,7 +91,214 @@
                 </div>
             </div>
         </header>
+
         <main>
+
+            <!-- Login-Register Modal -->
+            <div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog"
+                aria-labelledby="loginRegisterModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="nav nav-tabs row" id="myTab" role="tablist">
+                                <li class="nav-item col-6 text-center">
+                                    <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab"
+                                        aria-controls="login" aria-selected="true">
+                                        <h5>Login</h5>
+                                    </a>
+                                </li>
+                                <li class="nav-item col-6 text-center">
+                                    <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab"
+                                        aria-controls="register" aria-selected="false">
+                                        <h5>Register</h5>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="login" role="tabpanel"
+                                    aria-labelledby="login-tab">
+
+                                    <!-- Login Form -->
+
+                                    <div class="modal-body">
+                                        <div class="md-form mb-5">
+                                            <i class="fas fa-user prefix grey-text"></i>
+                                            <input type="text" id="loginUsername" name="loginUsername"
+                                                pattern="^[a-zA-Z].*" class="form-control validate my-2" required>
+                                            <label data-error="Username usually don't start from digit"
+                                                data-success="Seem OK" for="loginUsername" id="loginUsernameLabel">Your
+                                                name</label>
+                                        </div>
+                                        <div class="md-form mb-4">
+                                            <i class="fas fa-lock prefix grey-text"></i>
+                                            <input type="password" id="loginPassword" name="loginPassword"
+                                                pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2"
+                                                autocomplete="on" required>
+                                            <label
+                                                data-error="Password contains more than 6 characters with digits and alphabert"
+                                                data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your
+                                                password</label>
+                                            <p id="passwordAlert" class="text-danger invisible">Please fill in</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#passwordNotMatchModal" name="login">Login</button>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+
+                                    <!-- Registration Form -->
+
+                                    <div class="modal-body pb-4">
+                                        <div class="md-form mb-5">
+                                            <i class="fas fa-user prefix grey-text"></i>
+                                            <input type="text" id="registerUsername" name="registerUsername"
+                                                pattern="^[a-zA-Z].*" class="form-control validate" required>
+                                            <label data-error="Username usually don't start from digit"
+                                                data-success="Seem OK" for="registerUsername"
+                                                id="registerUsernameLabel">Your name</label>
+                                        </div>
+
+                                        <div class="md-form mb-4">
+                                            <i class="fas fa-lock prefix grey-text"></i>
+                                            <input type="password" id="registerPassword" name="registerPassword"
+                                                pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate"
+                                                autocomplete="on" required>
+                                            <label
+                                                data-error="Contains at least 6 characters with combination of digits and alphabert"
+                                                data-success="Seem OK" for="registerPassword">Your password</label>
+                                        </div>
+
+                                        <div class="md-form mb-4">
+                                            <i class="fas fa-lock prefix grey-text"></i>
+                                            <input type="password" id="passwordConfirm" class="form-control"
+                                                autocomplete="on" required>
+                                            <label data-error="Password not match" data-success="Seem OK"
+                                                for="passwordConfirm" id="passwordConfirmLabel">Confirm
+                                                password</label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" name="register" class="btn btn-primary"
+                                            data-toggle="modal" data-target="#logoutModal">Register</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post Question Modal -->
+            <div class="modal fade" id="postQuestionModal" tabindex="-1" role="dialog"
+                aria-labelledby="postQuestionModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Post a Question</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="form-group">
+                                <label for="questionTitle">Title</label>
+                                <input type="text" id="questionTitle" name="questionTitle"
+                                    class="rounded-lg form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="questionContent">Content</label>
+                                <textarea id="questionContent" name="questionContent" class="rounded-lg form-control"
+                                    rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-right">
+                            <button name="questionSubmit" class="btn btn-default text-white">Post</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Logout Alert -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Logout Alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to logout?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                            <button href="" type="submit" name="logoutBtn" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cannot Post Question Modal -->
+            <div class="modal fade" id="postQuestionForm" tabindex="-1" role="dialog" aria-labelledby="logoutModal"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            You cannot post any question before login or register an account
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Not Matched Modal -->
+            <div class="modal fade" id="passwordNotMatchModal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-danger" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="heading lead">Wrong Password</p>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <p>Password is not matched</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container">
                 <section class="py-2">
                     <div class="row my-2">
@@ -146,9 +355,7 @@
                 </section>
 
             </div>
-
         </main>
-
 
         <footer class="page-footer font-small blue font-small">
             <div class="col-md-12 text-center">

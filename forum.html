@@ -50,7 +50,8 @@
                             </a>
                         </div>
                         <div class="col-4 text-right my-auto">
-                            <button class="btn btn-danger login-register-btn login-register">
+                            <button class="btn btn-danger login-register-btn login-register" data-toggle="modal"
+                                data-target="#modaltest">
                                 <span class="textBreak">Login/Register</span>
                                 <span class="iconBreak"><i class="fas fa-sign-in-alt"></i></span>
                             </button>
@@ -58,9 +59,166 @@
                     </div>
                 </div>
             </div>
-
         </header>
+
         <main>
+
+            <!-- Edit Question Modal -->
+            <div class="modal fade" id="editQuestionModal" tabindex="-1" role="dialog"
+                aria-labelledby="editQuestionModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Edit Question</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="form-group">
+                                <label for="editQuestionTitle">Title</label>
+                                <input type="text" id="editQuestionTitle" name="editQuestionTitle"
+                                    class="rounded-lg form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editQuestionContent">Content</label>
+                                <textarea id="editQuestionContent" name="editQuestionContent"
+                                    class="rounded-lg form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-right">
+                            <button type="submit" name="editQuestionSubmit"
+                                class="btn btn-default text-white">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Question Modal -->
+            <div class="modal fade" id="confirmDeleteQuestionModal" tabindex="-1" role="dialog"
+                aria-labelledby="confirmDeleteQuestionModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Question Alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this question?
+                        </div>
+                        <input id="deleteQuestionID" name="deleteQuestionID" type="number" style="display: none">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                            <button type="submit" name="deleteQuestionSubmit" class="btn btn-danger">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Answer Modal -->
+            <div class="modal fade" id="editAnswerModal" tabindex="-1" role="dialog" aria-labelledby="editAnswerModal"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Edit Answer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="form-group">
+                                <label for="editAnswerContent">Content</label>
+                                <textarea id="editAnswerContent" name="editAnswerContent"
+                                    class="rounded-lg form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-right">
+                            <button type="submit" name="answerSubmit" class="btn btn-default text-white">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Answer Modal -->
+            <div class="modal fade" id="confirmDeleteAnswerModal" tabindex="-1" role="dialog"
+                aria-labelledby="confirmDeleteAnswerModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Answer Alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this answer?
+                        </div>
+                        <input id="deleteAnswerID" name="deleteAnswerID" type="number" style="display: none">
+                        <input id="deleteAnswerQuestionID" name="deleteAnswerQuestionID" type="number"
+                            style="display: none">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                            <button type="submit" name="deleteAnswerSubmit" class="btn btn-danger">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Failed to Delete/Edit/Post Question/Answer -->
+            <div class="modal fade" id="failedDeleteQuestionModal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-danger" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="heading lead">Cannot Delete/Edit/post Question/Answer</p>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <p>Failed to delete/edit/post the question/answer</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $("#failedDeleteQuestionModal").modal('show');
+            </script>
+
+            <!-- Success to Delete/Edit/Post Question/Answer -->
+            <div class="modal fade" id="successDeleteQuestionModal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-success" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="heading lead">Success Delete/Edit/post Question/Asnwer</p>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <p>The question/Asnwer/post is successfully deleted/Edit</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $("#successDeleteQuestionModal").modal('show');
+            </script>
+
             <div class="container py-2">
                 <section class="py-2">
                     <nav aria-label="breadcrumb">
@@ -82,18 +240,15 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-3"></div>
+                                            <div class="col-lg-8 col-md-3"></div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                                                <button class="btn btn-pink px-3">
-                                                    <i class="fas fa-heart"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                                                <button class="btn btn-default px-3">
+                                                <button class="btn btn-default px-3" data-toggle="modal"
+                                                    data-target="#editQuestionModal">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </div>
-                                            <div class="col-lg-2 col-md-3 col-sm-4 text-center">
+                                            <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
+                                                data-target="#confirmDeleteQuestionModal">
                                                 <button class="btn btn-danger px-3">
                                                     <i class="far fa-trash-alt "></i>
                                                 </button>
@@ -128,11 +283,13 @@
                                                 </button>
                                             </div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                                                <button class="btn btn-default px-3">
+                                                <button class="btn btn-default px-3" data-toggle="modal"
+                                                    data-target="#editAnswerModal">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </div>
-                                            <div class="col-lg-2 col-md-3 col-sm-4 text-center">
+                                            <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
+                                                data-target="#confirmDeleteAnswerModal">
                                                 <button class="btn btn-danger px-3">
                                                     <i class="far fa-trash-alt "></i>
                                                 </button>
