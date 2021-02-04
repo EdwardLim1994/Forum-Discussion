@@ -23,75 +23,86 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
 
                         <!-- Login Form -->
-
-                        <div class="modal-body">
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <input type="text" id="loginUsername" name="loginUsername" pattern="^[a-zA-Z].*"
-                                    class="form-control validate my-2" required>
-                                <label data-error="Username usually don't start from digit" data-success="Seem OK"
-                                    for="loginUsername" id="loginUsernameLabel">Your
-                                    name</label>
+                        <form class="needs-validation" novalidate>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <label for="loginUsername" id="loginUsernameLabel">Your
+                                        name</label>
+                                    <input type="text" id="loginUsername" name="loginUsername" pattern="^[a-zA-Z].*"
+                                        class="form-control my-2" required>
+                                    <div id="loginUsernameValidate" class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="loginPassword" id="loginPasswordLabel">Your
+                                        password</label>
+                                    <input type="password" id="loginPassword" name="loginPassword"
+                                        pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" required>
+                                    <div id="loginPasswordValidate" class="invalid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
                             </div>
-                            <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
-                                <input type="password" id="loginPassword" name="loginPassword"
-                                    pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" autocomplete="on"
-                                    required>
-                                <label data-error="Password contains more than 6 characters with digits and alphabert"
-                                    data-success="Seem OK" for="loginPassword" id="loginPasswordLabel">Your
-                                    password</label>
-                                <p id="passwordAlert" class="text-danger invisible">Please fill in</p>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="login">Login</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                data-target="#passwordNotMatchModal" name="login">Login</button>
-                        </div>
-
+                        </form>
                     </div>
+
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
 
                         <!-- Registration Form -->
+                        <form class="needs-validation" novalidate>
 
-                        <div class="modal-body pb-4">
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <input type="text" id="registerUsername" name="registerUsername" pattern="^[a-zA-Z].*"
-                                    class="form-control validate" required>
-                                <label data-error="Username usually don't start from digit" data-success="Seem OK"
-                                    for="registerUsername" id="registerUsernameLabel">Your name</label>
+                            <div class="modal-body pb-4">
+                                <div class="form-row">
+                                    <label for="registerUsername" id="registerUsernameLabel">Your name</label>
+                                    <input type="text" id="registerUsername" name="registerUsername"
+                                        pattern="^[a-zA-Z].*" class="form-control " required>
+                                    <div id="registerUsernameValidate" class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="registerEmail" id="registerEmailLabel">Your name</label>
+                                    <input type="email" id="registerUsername" name="registerEmail" pattern="^[a-zA-Z].*"
+                                        class="form-control " required>
+                                    <div id="registerEmailValidate" class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="registerPassword">Your password</label>
+                                    <input type="password" id="registerPassword" name="registerPassword"
+                                        pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control " autocomplete="on"
+                                        required>
+                                    <div id="registerPasswordValidate" class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="passwordConfirm" id="passwordConfirmLabel">Confirm
+                                        password</label>
+                                    <input type="password" id="passwordConfirm" class="form-control" autocomplete="on"
+                                        required>
+                                    <div id="PasswordConfirmValidate" class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
-                                <input type="password" id="registerPassword" name="registerPassword"
-                                    pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control validate"
-                                    autocomplete="on" required>
-                                <label
-                                    data-error="Contains at least 6 characters with combination of digits and alphabert"
-                                    data-success="Seem OK" for="registerPassword">Your password</label>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button name="register" class="btn btn-primary">Register</button>
                             </div>
-
-                            <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
-                                <input type="password" id="passwordConfirm" class="form-control" autocomplete="on"
-                                    required>
-                                <label data-error="Password not match" data-success="Seem OK" for="passwordConfirm"
-                                    id="passwordConfirmLabel">Confirm
-                                    password</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" name="register" class="btn btn-primary" data-toggle="modal"
-                                data-target="#logoutModal">Register</button>
-                        </div>
-
+                        </form>
                     </div>
                 </div>
             </div>

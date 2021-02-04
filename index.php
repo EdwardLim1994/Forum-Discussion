@@ -28,7 +28,7 @@ if (
     $conn->close();
 ?>
 <script type="text/javascript">
-window.location.replace("http://localhost/Forum-Discussion/list.php");
+window.location.replace("http://localhost/Forum-Discussion/list.php?page=1");
 </script>
 
 <?php
