@@ -43,4 +43,10 @@
         <?php include "./includes/components/parts/footer.php"; ?>
     </body>
 
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+    </script>
+
 </html>

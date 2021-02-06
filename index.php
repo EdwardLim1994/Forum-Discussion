@@ -38,5 +38,4 @@ window.location.replace("http://localhost/Forum-Discussion/list.php?page=1");
     $conn->close();
 }
 
-
 ?>

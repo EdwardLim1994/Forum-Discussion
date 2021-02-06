@@ -23,28 +23,28 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
 
                         <!-- Login Form -->
-                        <form class="needs-validation" novalidate>
+                        <form class="was-validated" id="loginForm" method="POST"
+                            action="./includes/functions/account/login.php" novalidate>
                             <div class="modal-body">
                                 <div class="form-row">
-                                    <label for="loginUsername" id="loginUsernameLabel">Your
-                                        name</label>
-                                    <input type="text" id="loginUsername" name="loginUsername" pattern="^[a-zA-Z].*"
-                                        class="form-control my-2" required>
-                                    <div id="loginUsernameValidate" class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="loginUsername" id="loginUsernameLabel">Your
+                                            name</label>
+                                        <input type="text" id="loginUsername" name="loginUsername" class="form-control"
+                                            required>
+                                        <div id="loginUsernameValidate"></div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="loginPassword" id="loginPasswordLabel">Your
-                                        password</label>
-                                    <input type="password" id="loginPassword" name="loginPassword"
-                                        pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control my-2" required>
-                                    <div id="loginPasswordValidate" class="invalid-feedback">
-                                        Looks good!
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="loginPassword" id="loginPasswordLabel">Your
+                                            password</label>
+                                        <input type="password" id="loginPassword" name="loginPassword"
+                                            class="form-control" autocomplete="on" required>
+                                        <div id="loginPasswordValidate"></div>
                                     </div>
                                 </div>
                             </div>
@@ -58,43 +58,44 @@
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
 
                         <!-- Registration Form -->
-                        <form class="needs-validation" novalidate>
+                        <form class="was-validated" id="registerForm" method="POST"
+                            action="./includes/functions/account/register.php" novalidate>
 
                             <div class="modal-body pb-4">
                                 <div class="form-row">
-                                    <label for="registerUsername" id="registerUsernameLabel">Your name</label>
-                                    <input type="text" id="registerUsername" name="registerUsername"
-                                        pattern="^[a-zA-Z].*" class="form-control " required>
-                                    <div id="registerUsernameValidate" class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="registerUsername" id="registerUsernameLabel">Your
+                                            name</label>
+                                        <input type="text" id="registerUsername" name="registerUsername"
+                                            class="form-control">
+                                        <div id="registerUsernameValidate"></div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <label for="registerEmail" id="registerEmailLabel">Your name</label>
-                                    <input type="email" id="registerUsername" name="registerEmail" pattern="^[a-zA-Z].*"
-                                        class="form-control " required>
-                                    <div id="registerEmailValidate" class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <label for="registerPassword">Your password</label>
-                                    <input type="password" id="registerPassword" name="registerPassword"
-                                        pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" class="form-control " autocomplete="on"
-                                        required>
-                                    <div id="registerPasswordValidate" class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="registerEmail" id="registerEmailLabel">Your Email</label>
+                                        <input type="email" id="registerEmail" name="registerEmail"
+                                            class="form-control">
+                                        <div id="registerEmailValidate"></div>
                                     </div>
                                 </div>
 
                                 <div class="form-row">
-                                    <label for="passwordConfirm" id="passwordConfirmLabel">Confirm
-                                        password</label>
-                                    <input type="password" id="passwordConfirm" class="form-control" autocomplete="on"
-                                        required>
-                                    <div id="PasswordConfirmValidate" class="valid-feedback">
-                                        Looks good!
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="registerPassword">Your password</label>
+                                        <input type="password" id="registerPassword" name="registerPassword"
+                                            class="form-control" autocomplete="on">
+                                        <div id="registerPasswordValidate"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3 md-form">
+                                        <label for="passwordConfirm" id="passwordConfirmLabel">Confirm
+                                            password</label>
+                                        <input type="password" id="passwordConfirm" class="form-control"
+                                            autocomplete="on">
+                                        <div id="passwordConfirmValidate"></div>
                                     </div>
                                 </div>
                             </div>
@@ -109,3 +110,5 @@
         </div>
     </div>
 </div>
+
+<script src="./dist/login-register-input-validation.prod.js"></script>

@@ -4,7 +4,6 @@ $(document).ready(function () {
     var year = new Date().getFullYear();
     $('#latestYear').text(year);
 
-
     $('.whatsappLink').on('click', function () {
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -18,6 +17,5 @@ $(document).ready(function () {
                 "_blank");
         }
     });
-
 
 })
