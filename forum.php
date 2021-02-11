@@ -49,7 +49,26 @@ if (isset($_SESSION['id'])) {
             <?php include "./includes/components/modals/delete-answer-modal.php"; ?>
 
 
+
+
             <div class="container py-2">
+
+
+                <?php
+
+            $questionID = $_GET['question'];
+            require_once './includes/functions/connectDB.php';
+
+            $sql = "SELECT q.id, q.title, q.content, q.postdate, q.user_id, u.username 
+                        FROM Question as q 
+                        LEFT JOIN User as u 
+                        ON q.user_id = u.id 
+                        WHERE q.id = '$questionID'";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) :
+                while ($row = mysqli_fetch_assoc($result)) :
+            ?>
                 <section class="py-2">
                     <?php include "./includes/components/parts/breadcrumb.php"; ?>
                 </section>
@@ -59,11 +78,14 @@ if (isset($_SESSION['id'])) {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h3 class="card-title">Card title</h3>
-                                        <p class="card-title">Tester 2</p>
-                                        <p class="card-title">2020-10-29</p>
+                                        <h3 class="card-title"><?= $row['title'] ?></h3>
+                                        <p class="card-title"><?= $row['username'] ?></p>
+                                        <p class="card-title"><?= date("Y-m-d g:ia", strtotime($row['postdate'])) ?>
+                                        </p>
                                     </div>
                                     <div class="col-4">
+
+                                        <?php if ($_SESSION['id'] == $row['user_id']) : ?>
                                         <div class="row">
                                             <div class="col-lg-8 col-md-3"></div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center">
@@ -79,17 +101,21 @@ if (isset($_SESSION['id'])) {
                                                 </button>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                                <p class="card-text text-justify">Lorem ipsum dolor sit amet consectetur adipisicing
-                                    elit. Dolores,
-                                    sint? Suscipit dolore vitae eligendi ea, aperiam rem laboriosam esse
-                                    exercitationem,
-                                    accusantium, ut repellendus at quasi libero doloribus numquam ipsum dolorem?</p>
+                                <p class="card-text text-justify"><?= $row['content'] ?></p>
                             </div>
                         </div>
                     </div>
                 </section>
+                <?php
+                endwhile;
+                mysqli_close($conn);
+            endif;
+            ?>
+
+
                 <section class="py-2">
                     <?php include "./includes/components/parts/answer-listing.php"; ?>
                 </section>

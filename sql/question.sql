@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS Question (
     id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    content VARCHAR(1000) NOT NULL,
+    title VARCHAR(2000) NOT NULL,
+    content VARCHAR(10000) NOT NULL,
     postdate DATETIME NOT NULL,
     user_id INT NOT NULL,
     PRIMARY KEY(id),

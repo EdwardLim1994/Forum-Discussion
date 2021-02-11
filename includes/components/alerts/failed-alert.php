@@ -12,8 +12,6 @@ Delete Answer
 
 <?php
 
-$headline = "";
-$body = "";
 if (isset($_GET['reason'])) {
     switch ($_GET['reason']) {
         case ("autologinfailed"):
@@ -31,6 +29,11 @@ if (isset($_GET['reason'])) {
         case ("passwordnotmatch"):
             $headline = "Password Not Match";
             $body = "Your login password is not matched with your account. Please try again";
+            break;
+
+        case ("failedtopostquestion"):
+            $headline = "Failed to Post Question";
+            $body = "Your question cannot be posted due to technical issue. Please try again";
             break;
     }
 }
@@ -59,7 +62,7 @@ if (isset($_GET['reason'])) {
     </div>
 </div>
 
-<?php if (isset($_GET['reason'])) : ?>
+<?php if (isset($_GET['reason'])) :  ?>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#failedToModal').modal('show');

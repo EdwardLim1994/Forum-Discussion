@@ -8,10 +8,12 @@ if (isset($_POST['username_ajax'])) {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
+
+        mysqli_close($conn);
         echo false;
     } else {
+
+        mysqli_close($conn);
         echo true;
     }
-
-    mysqli_close($conn);
 }

@@ -12,8 +12,6 @@ if (isset($_SESSION['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-
-
     <head>
         <?php include "./includes/components/parts/head.php"; ?>
     </head>
@@ -26,23 +24,22 @@ if (isset($_SESSION['id'])) {
 
         <main>
 
-            <?php if (isset($_GET['reason'])) : ?>
-            <!-- Failed Alert -->
-            <?php include "./includes/components/alerts/failed-alert.php"; ?>
-            <?php endif; ?>
+
+            <?php
 
 
-            <!-- Login-Register Modal -->
-            <?php include "./includes/components/modals/login-register-modal.php"; ?>
+        if ($hasLogin) :
+            include "./includes/components/alerts/logout-alert.php";
+            include "./includes/components/modals/post-question-modal.php";
 
-            <!-- Logout Alert -->
-            <?php include "./includes/components/alerts/logout-alert.php"; ?>
-
-            <!-- Post Question Modal -->
-            <?php include "./includes/components/modals/post-question-modal.php"; ?>
-
-            <!-- Success Alert -->
-            <?php include "./includes/components/alerts/success-alert.php"; ?>
+            if (isset($_GET['success'])) :
+                include "./includes/components/alerts/success-alert.php";
+            endif;
+        else :
+            include "./includes/components/modals/login-register-modal.php";
+            include "./includes/components/alerts/failed-alert.php";
+        endif;
+        ?>
 
 
             <div class="container">
