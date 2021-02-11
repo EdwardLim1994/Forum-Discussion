@@ -1,5 +1,18 @@
+<?php
+session_start();
+
+$pageTitle = "List";
+
+if (isset($_SESSION['id'])) {
+    $hasLogin = true;
+} else {
+    $hasLogin = false;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
+
 
     <head>
         <?php include "./includes/components/parts/head.php"; ?>
@@ -13,20 +26,24 @@
 
         <main>
 
+            <?php if (isset($_GET['reason'])) : ?>
+            <!-- Failed Alert -->
+            <?php include "./includes/components/alerts/failed-alert.php"; ?>
+            <?php endif; ?>
+
+
             <!-- Login-Register Modal -->
             <?php include "./includes/components/modals/login-register-modal.php"; ?>
 
             <!-- Logout Alert -->
             <?php include "./includes/components/alerts/logout-alert.php"; ?>
 
-            <!-- Password Not Matched Alert -->
-            <?php include "./includes/components/alerts/password-not-match-alert.php"; ?>
-
             <!-- Post Question Modal -->
             <?php include "./includes/components/modals/post-question-modal.php"; ?>
 
-            <!-- Cannot Post Question Alert -->
-            <?php include "./includes/components/alerts/cannot-post-question-alert.php"; ?>
+            <!-- Success Alert -->
+            <?php include "./includes/components/alerts/success-alert.php"; ?>
+
 
             <div class="container">
                 <section class="py-2">
@@ -43,10 +60,5 @@
         <?php include "./includes/components/parts/footer.php"; ?>
     </body>
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-
-    });
-    </script>
 
 </html>

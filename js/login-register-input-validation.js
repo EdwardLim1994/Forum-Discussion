@@ -1,28 +1,66 @@
 $(document).ready(function () {
+    //Visible Password Field
+
+    $('#loginPasswordVisible').click(function () {
+        toggleVisiblePassword("#loginPasswordVisible", "#loginPassword");
+    });
+
+    $("#registerPasswordVisible").click(function () {
+        toggleVisiblePassword("#registerPasswordVisible", "#registerPassword");
+    });
+
+    $("#registerConfirmPasswordVisible").click(function () {
+        toggleVisiblePassword("#registerConfirmPasswordVisible", "#passwordConfirm");
+    });
+
+
     //Syntax Validation Logic for User Registration
 
     //Validate Username
     var usernameRegisterCorrect = false;
+    var usernameRegisterEmpty = true;
     $("#registerUsername").on("input focusout", function () {
         if ($("#registerUsername").val() != "") {
+            usernameRegisterEmpty = false;
+
             if (/^[a-zA-Z].*/.test($("#registerUsername").val())) {
-                validInput("#registerUsername", "#registerUsernameValidate");
-                usernameRegisterCorrect = true;
+                $.ajax({
+                    method: "POST",
+                    url: "./includes/functions/search/checkUsername.php",
+                    data: {
+                        username_ajax: $("#registerUsername").val()
+                    },
+                    success: function (result) {
+                        if (result) {
+                            validInput("#registerUsername", "#registerUsernameValidate");
+                            usernameRegisterCorrect = true;
+                        } else {
+                            notValidInput("#registerUsername", "#registerUsernameValidate",
+                                "Username has already been used");
+                            usernameRegisterCorrect = false;
+                        }
+                    }
+                });
             } else {
                 notValidInput("#registerUsername", "#registerUsernameValidate",
                     "Username usually don't start from digit");
                 usernameRegisterCorrect = false;
             }
+
         } else {
             notValidInput("#registerUsername", "#registerUsernameValidate", "Cannot leave blank!");
             usernameRegisterCorrect = false;
+            usernameRegisterEmpty = true;
         }
     });
 
     //Validate Email
     var emailRegisterCorrect = false;
+    var emailRegisterEmpty = true;
     $("#registerEmail").on("input focusout", function () {
         if ($("#registerEmail").val() != "") {
+
+            emailRegisterEmpty = false;
             if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($("#registerEmail").val())) {
                 validInput("#registerEmail", "#registerEmailValidate");
                 emailRegisterCorrect = true;
@@ -33,13 +71,17 @@ $(document).ready(function () {
         } else {
             notValidInput("#registerEmail", "#registerEmailValidate", "Cannot leave blank!");
             emailRegisterCorrect = false;
+            emailRegisterEmpty = true;
         }
     });
 
     //Validate Password
     var passwordRegisterCorrect = false;
+    var passwordRegisterEmpty = true;
     $("#registerPassword").on("input focusout", function () {
         if ($("#registerPassword").val() != "") {
+
+            passwordRegisterEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#registerPassword").val())) {
                 validInput("#registerPassword", "#registerPasswordValidate");
                 passwordRegisterCorrect = true;
@@ -51,13 +93,16 @@ $(document).ready(function () {
         } else {
             notValidInput("#registerPassword", "#registerPasswordValidate", "Cannot leave blank!");
             passwordRegisterCorrect = false;
+            passwordRegisterEmpty = true;
         }
     });
 
     //Confirm Password
     var passwordMatch = false;
+    var passwordMatchEmpty = true;
     $("#passwordConfirm").on("input focusout", function () {
         if ($("#registerPassword").val() != "") {
+            passwordMatchEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#passwordConfirm").val())) {
                 validInput("#passwordConfirm", "#passwordConfirmValidate");
                 passwordMatch = true;
@@ -68,6 +113,7 @@ $(document).ready(function () {
         } else {
             notValidInput("#passwordConfirm", "#passwordConfirmValidate", "Cannot leave blank!");
             passwordMatch = false;
+            passwordMatchEmpty = true;
         }
     });
 
@@ -75,11 +121,15 @@ $(document).ready(function () {
         //Final Validation
         if (usernameRegisterCorrect && emailRegisterCorrect && passwordRegisterCorrect && passwordMatch) {
             return true;
-        } else {
+        } else if (usernameRegisterEmpty && emailRegisterEmpty && passwordRegisterEmpty && passwordMatchEmpty) {
             notValidInput("#registerUsername", "#registerUsernameValidate", "Cannot leave blank!");
             notValidInput("#registerEmail", "#registerEmailValidate", "Cannot leave blank!");
             notValidInput("#registerPassword", "#registerPasswordValidate", "Cannot leave blank!");
             notValidInput("#passwordConfirm", "#passwordConfirmValidate", "Cannot leave blank!");
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        } else {
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -90,11 +140,31 @@ $(document).ready(function () {
 
     //Validate Username
     var usernameLoginCorrect = false;
+    var usernameLoginEmpty = true;
     $("#loginUsername").on("input focusout", function () {
         if ($("#loginUsername").val() != "") {
+
+            usernameLoginEmpty = false;
             if (/^[a-zA-Z].*/.test($("#loginUsername").val())) {
-                validInput("#loginUsername", "#loginUsernameValidate");
-                usernameLoginCorrect = true;
+
+                $.ajax({
+                    method: "POST",
+                    url: "./includes/functions/search/checkUsername.php",
+                    data: {
+                        username_ajax: $("#loginUsername").val()
+                    },
+                    success: function (result) {
+
+                        if (!result) {
+                            validInput("#loginUsername", "#loginUsernameValidate");
+                            usernameLoginCorrect = true;
+                        } else {
+                            notValidInput("#loginUsername", "#loginUsernameValidate",
+                                "Username does not exist");
+                            usernameLoginCorrect = false;
+                        }
+                    }
+                });
             } else {
                 notValidInput("#loginUsername", "#loginUsernameValidate",
                     "Username usually don't start from digit");
@@ -108,8 +178,10 @@ $(document).ready(function () {
 
     //Validate Password
     var passwordLoginCorrect = false;
+    var passwordLoginEmpty = true;
     $("#loginPassword").on("input focusout", function () {
         if ($("#loginPassword").val() != "") {
+            passwordLoginEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#loginPassword").val())) {
                 validInput("#loginPassword", "#loginPasswordValidate");
                 passwordLoginCorrect = true;
@@ -121,6 +193,7 @@ $(document).ready(function () {
         } else {
             notValidInput("#loginPassword", "#loginPasswordValidate", "Cannot leave blank!");
             passwordLoginCorrect = false;
+            passwordLoginEmpty = true;
         }
     });
 
@@ -128,14 +201,31 @@ $(document).ready(function () {
         //Final Validation
         if (usernameLoginCorrect && passwordLoginCorrect) {
             return true;
-        } else {
+        } else if (usernameLoginEmpty && passwordLoginEmpty) {
             notValidInput("#loginUsername", "#loginUsernameValidate", "Cannot leave blank!");
             notValidInput("#loginPassword", "#loginPasswordValidate", "Cannot leave blank!");
             event.preventDefault();
             event.stopPropagation();
             return false;
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
         }
     });
+
+    //Toggle Visible Password Functions
+    function toggleVisiblePassword(toggleID, inputID) {
+
+        if ($(inputID).attr("type") === "password") {
+            $(inputID).attr("type", "text");
+            $(toggleID + " .fas").removeClass("fa-eye-slash").addClass("fa-eye");
+
+        } else {
+            $(inputID).attr("type", "password");
+            $(toggleID + " .fas").removeClass("fa-eye").addClass("fa-eye-slash");
+        }
+    }
 
     //Not Valid Input function
     function notValidInput(inputID, validateID, text) {

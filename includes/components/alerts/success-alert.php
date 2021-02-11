@@ -1,16 +1,29 @@
-<div class="modal fade" id="successDeleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
+<!--
+Post Question
+Edit Question
+Delete Question
+Post Answer
+Edit Answer
+Delete Answer 
+-->
+
+<?php
+$headline = "";
+$body = "";
+?>
+
+<div class="modal fade" id="successDeleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p class="heading lead">Success Delete/Edit/post Question/Asnwer</p>
+                <p class="heading lead"><?php echo $headline; ?></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>The question/Asnwer/post is successfully deleted/Edit</p>
+                    <p><?php echo $body; ?></p>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">

@@ -32,12 +32,8 @@ if (isset($_POST['login'])) {
             mysqli_close($conn);
             exit();
         }
-    } else {
-        header("location: ../../../list.php?page=1&reason=usernotexist");
-        mysqli_close($conn);
-        exit();
     }
 } else {
-    header("location: ../../../list.php?page=1");
+    header("location: ../../../list.php?page=1&reason=cannotreceivepostdata");
     exit();
 }

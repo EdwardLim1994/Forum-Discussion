@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+$pageTitle = "Question";
+
+if (isset($_SESSION['id'])) {
+    $hasLogin = true;
+} else {
+    $hasLogin = false;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +29,12 @@
             <!-- Logout Alert -->
             <?php include "./includes/components/alerts/logout-alert.php"; ?>
 
-            <!-- Password Not Matched Alert -->
-            <?php include "./includes/components/alerts/password-not-match-alert.php"; ?>
+            <!-- Success Alert -->
+            <?php include "./includes/components/alerts/success-alert.php"; ?>
+
+            <!-- Failed Alert -->
+            <?php include "./includes/components/alerts/failed-alert.php"; ?>
+
 
             <!-- Edit Question Modal -->
             <?php include "./includes/components/modals/edit-question-modal.php"; ?>
@@ -33,11 +48,6 @@
             <!-- Delete Answer Modal -->
             <?php include "./includes/components/modals/delete-answer-modal.php"; ?>
 
-            <!-- Failed to Delete/Edit/Post Question/Answer -->
-            <?php include "./includes/components/alerts/failed-to-alert.php"; ?>
-
-            <!-- Success to Delete/Edit/Post Question/Answer -->
-            <?php include "./includes/components/alerts/success-to-alert.php"; ?>
 
             <div class="container py-2">
                 <section class="py-2">

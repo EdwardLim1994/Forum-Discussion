@@ -31,8 +31,9 @@
                             <div class="modal-body">
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="loginUsername" id="loginUsernameLabel">Your
-                                            name</label>
+                                        <label for="loginUsername" id="loginUsernameLabel">
+                                            <i class="fas fa-user px-3"></i>Your username
+                                        </label>
                                         <input type="text" id="loginUsername" name="loginUsername" class="form-control"
                                             required>
                                         <div id="loginUsernameValidate"></div>
@@ -40,11 +41,22 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="loginPassword" id="loginPasswordLabel">Your
-                                            password</label>
-                                        <input type="password" id="loginPassword" name="loginPassword"
-                                            class="form-control" autocomplete="on" required>
-                                        <div id="loginPasswordValidate"></div>
+
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <label for="loginPassword" id="loginPasswordLabel">
+                                                    <i class="fas fa-lock px-3"></i>Your password</label>
+                                                <input type="password" id="loginPassword" name="loginPassword"
+                                                    class="form-control" autocomplete="on" required>
+                                                <div id="loginPasswordValidate"></div>
+                                            </div>
+                                            <div class="col-2">
+                                                <a id="loginPasswordVisible">
+                                                    <i class="fas fa-eye-slash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +76,9 @@
                             <div class="modal-body pb-4">
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="registerUsername" id="registerUsernameLabel">Your
-                                            name</label>
+                                        <label for="registerUsername" id="registerUsernameLabel">
+                                            <i class="fas fa-user px-3"></i>Your username
+                                        </label>
                                         <input type="text" id="registerUsername" name="registerUsername"
                                             class="form-control">
                                         <div id="registerUsernameValidate"></div>
@@ -73,7 +86,9 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="registerEmail" id="registerEmailLabel">Your Email</label>
+                                        <label for="registerEmail" id="registerEmailLabel">
+                                            <i class="fas fa-envelope-open px-3"></i>Your Email
+                                        </label>
                                         <input type="email" id="registerEmail" name="registerEmail"
                                             class="form-control">
                                         <div id="registerEmailValidate"></div>
@@ -82,20 +97,44 @@
 
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="registerPassword">Your password</label>
-                                        <input type="password" id="registerPassword" name="registerPassword"
-                                            class="form-control" autocomplete="on">
-                                        <div id="registerPasswordValidate"></div>
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <label for="registerPassword">
+                                                    <i class="fas fa-lock px-3"></i>Your password
+                                                </label>
+                                                <input type="password" id="registerPassword" name="registerPassword"
+                                                    class="form-control" autocomplete="on">
+                                                <div id="registerPasswordValidate"></div>
+                                            </div>
+                                            <div class="col-2">
+                                                <a id="registerPasswordVisible">
+                                                    <i class="fas fa-eye-slash"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
-                                        <label for="passwordConfirm" id="passwordConfirmLabel">Confirm
-                                            password</label>
-                                        <input type="password" id="passwordConfirm" class="form-control"
-                                            autocomplete="on">
-                                        <div id="passwordConfirmValidate"></div>
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <label for="passwordConfirm" id="passwordConfirmLabel">
+                                                    <i class="fas fa-key px-3"></i>Confirm password</label>
+                                                <input type="password" id="passwordConfirm" class="form-control"
+                                                    autocomplete="on">
+                                                <div id="passwordConfirmValidate"></div>
+                                            </div>
+                                            <div class="col-2">
+                                                <a id="registerConfirmPasswordVisible">
+                                                    <i class="fas fa-eye-slash"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
