@@ -24,20 +24,21 @@ if (isset($_POST['register'])) {
             session_start();
             $_SESSION['userID'] = $currentid;
             $_SESSION['username'] = $currentUsername;
-            header("location: ../../../list.php?page=1");
+            header("location: " . $_SESSION['currentUrl']);
+            //header("location: ../../../list.php?page=1");
             mysqli_close($conn);
             exit();
         } else {
-            header("location: ../../../list.php?page=1&reason=autologinfailed");
+            header("location: " . $_SESSION['currentUrl'] . "&reason=autologinfailed");
             mysqli_close($conn);
             exit();
         }
     } else {
-        header("location: ../../../list.php?page=1&reason=cannotinsertuserdataintodatabase");
+        header("location: " . $_SESSION['currentUrl'] . "&reason=cannotinsertuserdataintodatabase");
         mysqli_close($conn);
         exit();
     }
 } else {
-    header("location: ../../../list.php?page=1&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
     exit();
 }

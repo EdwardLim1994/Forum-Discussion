@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (isset($_POST['login'])) {
 
     $username = $_POST['loginUsername'];
@@ -20,20 +20,18 @@ if (isset($_POST['login'])) {
 
         if (password_verify($password, $hasedpassword)) {
 
-            session_start();
             $_SESSION['userID'] = $currentid;
             $_SESSION['username'] = $currentUsername;
-
-            header("location: ../../../list.php?page=1");
+            header("location: " . $_SESSION['currentUrl']);
             mysqli_close($conn);
             exit();
         } else {
-            header("location: ../../../list.php?page=1&reason=passwordnotmatch");
+            header("location: " . $_SESSION['currentUrl'] . "&reason=passwordnotmatch");
             mysqli_close($conn);
             exit();
         }
     }
 } else {
-    header("location: ../../../list.php?page=1&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
     exit();
 }

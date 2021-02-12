@@ -3,11 +3,11 @@ session_start();
 require_once './includes/functions/connectDB.php';
 
 $pageTitle = "Question";
+$_SESSION['currentUrl'] = "http://localhost" . $_SERVER['REQUEST_URI'];
 
 if (isset($_SESSION['userID'])) {
     $hasLogin = true;
     $_SESSION['currentQuestionID'] = $_GET['question'];
-    $_SESSION['currentUrl'] = "http://localhost" . $_SERVER['REQUEST_URI'];
 } else {
     $hasLogin = false;
 }
