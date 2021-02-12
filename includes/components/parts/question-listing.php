@@ -1,5 +1,20 @@
 <?php
 
+$rowsPerPage = 2;
+
+$sql = "SELECT * FROM Question";
+$result = mysqli_query($conn, $sql);
+$rowCount = mysqli_num_rows($result);
+$pageNum = ceil($rowCount / $rowsPerPage);
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$thisPageFirstRow = ($page - 1) * $rowsPerPage;
+
 if (isset($_GET['searchKeyword'])) {
 
     $search = $_GET['searchKeyword'];
@@ -8,7 +23,8 @@ if (isset($_GET['searchKeyword'])) {
             LEFT JOIN User as u 
             ON q.user_id = u.id 
             WHERE q.title LIKE %'$search'% OR q.content LIKE %'$search'% 
-            ORDER BY q.postdate DESC";
+            ORDER BY q.postdate DESC
+            LIMIT $thisPageFirstRow, $rowsPerPage";
     $result = mysqli_query($conn, $sql);
 ?>
 <div class="row py-2">
@@ -48,7 +64,8 @@ if (isset($_GET['searchKeyword'])) {
             FROM Question as q 
             LEFT JOIN User as u 
             ON q.user_id = u.id
-            ORDER BY q.postdate DESC";
+            ORDER BY q.postdate DESC
+            LIMIT $thisPageFirstRow, $rowsPerPage";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) :

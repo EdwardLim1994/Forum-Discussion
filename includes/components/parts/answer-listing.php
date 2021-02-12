@@ -1,8 +1,25 @@
 <?php
+
+$rowsPerPage = 2;
+
+$sql = "SELECT * FROM Answer";
+$result = mysqli_query($conn, $sql);
+$rowCount = mysqli_num_rows($result);
+$pageNum = ceil($rowCount / $rowsPerPage);
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$thisPageFirstRow = ($page - 1) * $rowsPerPage;
+
 $sql = "SELECT a.id, a.answer, a.postdate, u.username 
         FROM Answer as a
         LEFT JOIN User as u 
-        ON a.user_id = u.id";
+        ON a.user_id = u.id
+        LIMIT $thisPageFirstRow, $rowsPerPage";
 
 $result = mysqli_query($conn, $sql);
 
