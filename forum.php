@@ -1,10 +1,13 @@
 <?php
 session_start();
+require_once './includes/functions/connectDB.php';
 
 $pageTitle = "Question";
 
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['userID'])) {
     $hasLogin = true;
+    $_SESSION['currentQuestionID'] = $_GET['question'];
+    $_SESSION['currentUrl'] = "http://localhost" . $_SERVER['REQUEST_URI'];
 } else {
     $hasLogin = false;
 }
@@ -20,44 +23,31 @@ if (isset($_SESSION['id'])) {
         <header class="sticky-top z-depth-1">
             <?php include "./includes/components/parts/header.php"; ?>
         </header>
-
         <main>
+            <?php if ($hasLogin) :
+            include "./includes/components/alerts/logout-alert.php";
+            include "./includes/components/alerts/failed-alert.php";
+            include "./includes/components/modals/edit-question-modal.php";
+            include "./includes/components/modals/delete-question-modal.php";
+            include "./includes/components/modals/edit-answer-modal.php";
+            include "./includes/components/modals/delete-answer-modal.php";
 
-            <!-- Login-Register Modal -->
-            <?php include "./includes/components/modals/login-register-modal.php"; ?>
+            if (isset($_GET['success'])) :
+                include "./includes/components/alerts/success-alert.php";
+            endif;
+        else :
 
-            <!-- Logout Alert -->
-            <?php include "./includes/components/alerts/logout-alert.php"; ?>
+            include "./includes/components/modals/login-register-modal.php";
+            include "./includes/components/alerts/failed-alert.php";
 
-            <!-- Success Alert -->
-            <?php include "./includes/components/alerts/success-alert.php"; ?>
-
-            <!-- Failed Alert -->
-            <?php include "./includes/components/alerts/failed-alert.php"; ?>
-
-
-            <!-- Edit Question Modal -->
-            <?php include "./includes/components/modals/edit-question-modal.php"; ?>
-
-            <!-- Delete Question Modal -->
-            <?php include "./includes/components/modals/delete-question-modal.php"; ?>
-
-            <!-- Edit Answer Modal -->
-            <?php include "./includes/components/modals/edit-answer-modal.php"; ?>
-
-            <!-- Delete Answer Modal -->
-            <?php include "./includes/components/modals/delete-answer-modal.php"; ?>
-
-
-
+        endif; ?>
 
             <div class="container py-2">
-
 
                 <?php
 
             $questionID = $_GET['question'];
-            require_once './includes/functions/connectDB.php';
+
 
             $sql = "SELECT q.id, q.title, q.content, q.postdate, q.user_id, u.username 
                         FROM Question as q 
@@ -84,10 +74,11 @@ if (isset($_SESSION['id'])) {
                                         </p>
                                     </div>
                                     <div class="col-4">
+                                        <?php if (isset($_SESSION['id'])) {
+                                                if ($_SESSION['id'] == $row['user_id']) : ?>
 
-                                        <?php if ($_SESSION['id'] == $row['user_id']) : ?>
                                         <div class="row">
-                                            <div class="col-lg-8 col-md-3"></div>
+                                            <div class="col-lg-8 col-md-3 col-sm-4"></div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center">
                                                 <button class="btn btn-default px-3" data-toggle="modal"
                                                     data-target="#editQuestionModal">
@@ -101,7 +92,9 @@ if (isset($_SESSION['id'])) {
                                                 </button>
                                             </div>
                                         </div>
-                                        <?php endif; ?>
+                                        <?php
+                                                endif;
+                                            } ?>
                                     </div>
                                 </div>
                                 <p class="card-text text-justify"><?= $row['content'] ?></p>
@@ -111,11 +104,8 @@ if (isset($_SESSION['id'])) {
                 </section>
                 <?php
                 endwhile;
-                mysqli_close($conn);
             endif;
             ?>
-
-
                 <section class="py-2">
                     <?php include "./includes/components/parts/answer-listing.php"; ?>
                 </section>
@@ -125,35 +115,74 @@ if (isset($_SESSION['id'])) {
                 </section>
 
                 <section class="py-2">
-                    <div class="card">
-                        <div class="card-header blue">
-                            <div class="row">
-                                <div class="col-6 my-auto">
-                                    <h5 class="text-white">Share Your Answer</h5>
+
+                    <?php if ($hasLogin) : ?>
+                    <form action="./includes/functions/answer/post.php" method="POST" name="answerSubmit"
+                        id="postAnswerForm">
+                        <?php endif; ?>
+                        <div class="card">
+                            <div class="card-header blue">
+                                <div class="row">
+                                    <div class="col-6 my-auto">
+                                        <h5 class="text-white">Share Your Answer</h5>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button class="btn btn-primary post-answer" type="submit" id="postAnswerBtn"
+                                            name="answerSubmit">
+                                            <span class="textBreak">Post</span>
+                                            <span class="iconBreak"><i class="fas fa-share"></i></span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-6 text-right">
-                                    <button class="btn btn-primary post-answer">
-                                        <span class="textBreak">Post</span>
-                                        <span class="iconBreak"><i class="fas fa-share"></i></span>
-                                    </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0" id="answerContent" name="postAnswerContent"
+                                        rows="5"></textarea>
+                                    <input type="text" class="d-none" name="userID"
+                                        value="<?= $_SESSION['userID'] ?>" />
+                                    <input type="text" class="d-none" name="questionID"
+                                        value="<?= $_SESSION['currentQuestionID'] ?>">
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <textarea class="form-control rounded-0" id="exampleFormControlTextarea1"
-                                    rows="5"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                        <?php if ($hasLogin) : ?>
+                    </form>
+                    <?php endif; ?>
                 </section>
             </div>
         </main>
-        <?php include "./includes/components/parts/footer.php"; ?>
+        <?php
+    include "./includes/components/parts/footer.php";
+    include_once "./includes/functions/closeDB.php";
+    ?>
+
     </body>
 
     <script type="text/javascript">
     $(document).ready(function() {
+
+        <?php if ($hasLogin) : ?>
+        $("#postAnswerForm").submit(function() {
+            if ($("#answerContent").val() == "") {
+                $("#messageHeadline").empty().append("Cannot Post Answer");
+                $("#messageBody").empty().append("Answer cannot leave blank");
+                $("#failedToModal").modal('show');
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            } else {
+                return true;
+            }
+        });
+        <?php else : ?>
+
+        $("#postAnswerBtn").click(function() {
+            $("#messageHeadline").empty().append("Cannot Post Answer");
+            $("#messageBody").empty().append("You need to login to post answer");
+            $("#failedToModal").modal('show');
+        })
+        <?php endif; ?>
 
     });
     </script>

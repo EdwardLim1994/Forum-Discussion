@@ -22,7 +22,7 @@ if (isset($_POST['register'])) {
             }
 
             session_start();
-            $_SESSION['id'] = $currentid;
+            $_SESSION['userID'] = $currentid;
             $_SESSION['username'] = $currentUsername;
             header("location: ../../../list.php?page=1");
             mysqli_close($conn);

@@ -11,7 +11,8 @@ Delete Answer
 -->
 
 <?php
-
+$headline = "";
+$body = "";
 if (isset($_GET['reason'])) {
     switch ($_GET['reason']) {
         case ("autologinfailed"):
@@ -35,6 +36,13 @@ if (isset($_GET['reason'])) {
             $headline = "Failed to Post Question";
             $body = "Your question cannot be posted due to technical issue. Please try again";
             break;
+        case ("failedtopostanswer"):
+            $headline = "Failed to Post Answer";
+            $body = "Your answer cannot be posted due to technical issue. Please try again";
+            break;
+        case ("cannotcreatevoterecord"):
+
+            break;
     }
 }
 
@@ -45,14 +53,14 @@ if (isset($_GET['reason'])) {
     <div class="modal-dialog modal-notify modal-danger" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p class="heading lead"><?php echo $headline; ?></p>
+                <p class="heading lead" id="messageHeadline"><?php echo $headline; ?></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p><?php echo $body; ?></p>
+                    <p id="messageBody"><?php echo $body; ?></p>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">

@@ -18,6 +18,10 @@ if (isset($_GET['success'])) {
             $headline = "Success to Post Question";
             $body = "Your question has been successfully posted";
             break;
+        case ("successtopostanswer"):
+            $headline = "Success to Post Answer";
+            $body = "Your answer has been successfully posted";
+            break;
     }
 }
 ?>

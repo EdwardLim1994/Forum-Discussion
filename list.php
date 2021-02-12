@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once './includes/functions/connectDB.php';
 
 $pageTitle = "List";
 
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['userID'])) {
     $hasLogin = true;
+    $_SESSION['currentUrl'] = "http://localhost" . $_SERVER['REQUEST_URI'];
 } else {
     $hasLogin = false;
 }
@@ -54,7 +56,10 @@ if (isset($_SESSION['id'])) {
             </div>
         </main>
 
-        <?php include "./includes/components/parts/footer.php"; ?>
+        <?php
+    include "./includes/components/parts/footer.php";
+    include_once "./includes/functions/closeDB.php";
+    ?>
     </body>
 
 

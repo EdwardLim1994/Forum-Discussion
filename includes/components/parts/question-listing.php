@@ -2,7 +2,6 @@
 
 if (isset($_GET['searchKeyword'])) {
 
-    require_once './includes/functions/connectDB.php';
     $search = $_GET['searchKeyword'];
     $sql = "SELECT q.id, q.title, q.content, q.postdate, u.username 
             FROM Question as q 
@@ -34,7 +33,6 @@ if (isset($_GET['searchKeyword'])) {
 </div>
 <?php
         endwhile;
-        mysqli_close($conn);
     else :
         ?>
 <div class="row my-2 text-center">
@@ -45,8 +43,6 @@ if (isset($_GET['searchKeyword'])) {
 <?php
     endif;
 } else {
-
-    require_once './includes/functions/connectDB.php';
 
     $sql = "SELECT q.id, q.title, q.content, q.postdate, u.username 
             FROM Question as q 
@@ -74,7 +70,6 @@ if (isset($_GET['searchKeyword'])) {
 
 <?php
         endwhile;
-        mysqli_close($conn);
     else :
         ?>
 <div class="row my-2 text-center">
