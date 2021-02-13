@@ -45,8 +45,10 @@ if (mysqli_num_rows($result) > 0) :
                                     if ($_SESSION['userID'] == $row['user_id']) :
                                 ?>
                         <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                            <button class="btn btn-default px-3" data-toggle="modal" data-target="#editAnswerModal">
+                            <button class="btn btn-default px-3 editAnswerBtn" data-toggle="modal"
+                                data-target="#editAnswerModal">
                                 <i class="fas fa-edit"></i>
+                                <input type="number" class="d-none" value="<?= $row['id'] ?>">
                             </button>
                         </div>
                         <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
@@ -55,6 +57,11 @@ if (mysqli_num_rows($result) > 0) :
                                 <i class="far fa-trash-alt "></i>
                                 <input type="number" class="d-none" value="<?= $row['id'] ?>">
                             </button>
+                        </div>
+
+                        <?php else : ?>
+
+                        <div class="col-lg-4 col-md-6 col-sm-8">
                         </div>
                         <?php endif;
                                 else : ?>
@@ -71,7 +78,7 @@ if (mysqli_num_rows($result) > 0) :
                     </div>
                 </div>
             </div>
-            <p class="card-text text-justify"><?= $row['answer'] ?></p>
+            <p class="card-text text-justify" id="answerContent-<?= $row['id'] ?>"><?= $row['answer'] ?></p>
         </div>
 
     </div>

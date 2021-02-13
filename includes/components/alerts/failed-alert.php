@@ -49,6 +49,19 @@ if (isset($_GET['reason'])) {
             $headline = "Failed to Delete Answer";
             $body = "Your answer cannot be deleted due to technical issue. Please try again ";
             break;
+        case ("failedtodeletequestion"):
+            $headline = "Failed to Delete Question";
+            $body = "Your question cannot be deleted due to technical issue. Please try again ";
+            break;
+
+        case ("failedtoeditanswer"):
+            $headline = "Failed to Edit Answer";
+            $body = "Your answer cannot be edited due to technical issue. Please try again ";
+            break;
+        case ("failedtoeditquestion"):
+            $headline = "Failed to Edit Question";
+            $body = "Your question cannot be edited due to technical issue. Please try again ";
+            break;
     }
 }
 

@@ -16,7 +16,7 @@ if (isset($_POST['answerSubmit'])) {
         $sql = "INSERT IGNORE INTO Vote (user_id, answer_id) VALUES ('$userID', '$last_id')";
 
         if (mysqli_query($conn, $sql)) {
-            header("location: ../../../forum.php?question=" . $questionID . "&success=successtopostanswer");
+            header("location: " . $_SESSION['currentUrl'] . "&success=successtopostanswer");
             mysqli_close($conn);
             exit();
         } else {
@@ -24,13 +24,13 @@ if (isset($_POST['answerSubmit'])) {
             $sql = "DELETE FROM Answer WHERE answer_id = $last_id";
             mysqli_query($conn, $sql);
 
-            header("location: ../../../forum.php?question=" . $questionID . "&reason=cannotcreatevoterecord");
+            header("location: " . $_SESSION['currentUrl'] . "&reason=cannotcreatevoterecord");
             mysqli_close($conn);
             exit();
         }
     } else {
 
-        header("location: ../../../forum.php?question=" . $questionID . "&reason=failedtopostanswer");
+        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtopostanswer");
         mysqli_close($conn);
         exit();
     }

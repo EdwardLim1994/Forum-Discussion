@@ -30,6 +30,14 @@ if (isset($_GET['success'])) {
             $headline = "Success to Delete Question";
             $body = "Your question has been successfully deleted";
             break;
+        case ("successtoeditanswer"):
+            $headline = "Success to Edit Answer";
+            $body = "Your answer has been successfully edited";
+            break;
+        case ("successtoeditquestion"):
+            $headline = "Success to Edit Question";
+            $body = "Your question has been successfully edited";
+            break;
     }
 }
 ?>

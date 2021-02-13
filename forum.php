@@ -68,7 +68,8 @@ if (isset($_SESSION['userID'])) {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h3 class="card-title"><?= $row['title'] ?></h3>
+                                        <h3 class="card-title" id="questionTitle-<?= $row['id'] ?>"><?= $row['title'] ?>
+                                        </h3>
                                         <p class="card-title"><?= $row['username'] ?></p>
                                         <p class="card-title"><?= date("Y-m-d g:ia", strtotime($row['postdate'])) ?>
                                         </p>
@@ -80,9 +81,11 @@ if (isset($_SESSION['userID'])) {
                                         <div class="row">
                                             <div class="col-lg-8 col-md-3 col-sm-4"></div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                                                <button class="btn btn-default px-3" data-toggle="modal"
+                                                <button class="btn btn-default px-3 editQuestionBtn" data-toggle="modal"
                                                     data-target="#editQuestionModal">
                                                     <i class="fas fa-edit"></i>
+                                                    <input type="number" class="d-none"
+                                                        value="<?= $_GET['question'] ?>">
                                                 </button>
                                             </div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
@@ -100,7 +103,8 @@ if (isset($_SESSION['userID'])) {
                                     </div>
 
                                 </div>
-                                <p class="card-text text-justify"><?= $row['content'] ?></p>
+                                <p class="card-text text-justify" id="questionContent-<?= $row['id'] ?>">
+                                    <?= $row['content'] ?></p>
                             </div>
                         </div>
                     </div>
