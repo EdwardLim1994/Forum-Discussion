@@ -1,6 +1,6 @@
 <?php
 
-$rowsPerPage = 2;
+$rowsPerPage = 20;
 
 $sql = "SELECT * FROM Question";
 $result = mysqli_query($conn, $sql);

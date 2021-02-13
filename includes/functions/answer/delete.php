@@ -1,22 +1,25 @@
 <?php
-
+session_start();
 if (isset($_POST['deleteAnswerSubmit'])) {
 
     require_once "../connectDB.php";
 
     $answerID = $_POST['deleteAnswerID'];
-    $questionID = $_POST['deleteAnswerQuestionID'];
+
 
     $sql = "DELETE FROM Answer WHERE id = '$answerID'";
 
     if (mysqli_query($conn, $sql)) {
 
-        header("location: ../../../forum.php?question=" . $questionID . "&reason=deleteanswerquerysuccess");
+        header("location: " . $_SESSION['currentUrl'] . "&success=successtodeleteanswer");
         mysqli_close($conn);
         exit();
     } else {
-        header("location: ../../../forum.php?question=" . $questionID . "&reason=deleteanswerqueryfailed");
+        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtodeleteanswer");
         mysqli_close($conn);
         exit();
     }
+} else {
+    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    exit();
 }

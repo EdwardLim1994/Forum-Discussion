@@ -1,0 +1,1 @@
+"use strict";$(document).ready(function(){$(".deleteAnswerBtn").click(function(){var e=$(this).children("input").val();$("#deleteAnswerID").val(e)}),$(".deleteQuestionBtn").click(function(){var e=$(this).children("input").val();$("#deleteQuestionID").val(e)})});

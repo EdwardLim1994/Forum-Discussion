@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (isset($_POST['deleteQuestionSubmit'])) {
 
     require_once "../connectDB.php";
@@ -10,12 +10,15 @@ if (isset($_POST['deleteQuestionSubmit'])) {
 
     if (mysqli_query($conn, $sql)) {
 
-        header("location: ../../../list.php?&reason=deletequestionquerysuccess");
+        header("location: ../../../list.php?page=1&success=successtodeletequestion");
         mysqli_close($conn);
         exit();
     } else {
-        header("location: ../../../forum.php?question=" . $questionID . "&reason=deletequestionqueryfailed");
+        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtodeletequestion");
         mysqli_close($conn);
         exit();
     }
+} else {
+    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    exit();
 }

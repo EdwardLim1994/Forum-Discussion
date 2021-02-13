@@ -20,6 +20,10 @@ if (isset($_POST['answerSubmit'])) {
             mysqli_close($conn);
             exit();
         } else {
+
+            $sql = "DELETE FROM Answer WHERE answer_id = $last_id";
+            mysqli_query($conn, $sql);
+
             header("location: ../../../forum.php?question=" . $questionID . "&reason=cannotcreatevoterecord");
             mysqli_close($conn);
             exit();

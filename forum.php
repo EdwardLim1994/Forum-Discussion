@@ -28,9 +28,9 @@ if (isset($_SESSION['userID'])) {
             include "./includes/components/alerts/logout-alert.php";
             include "./includes/components/alerts/failed-alert.php";
             include "./includes/components/modals/edit-question-modal.php";
-            include "./includes/components/modals/delete-question-modal.php";
+            include "./includes/components/modals/delete-question-alert.php";
             include "./includes/components/modals/edit-answer-modal.php";
-            include "./includes/components/modals/delete-answer-modal.php";
+            include "./includes/components/modals/delete-answer-alert.php";
 
             if (isset($_GET['success'])) :
                 include "./includes/components/alerts/success-alert.php";
@@ -74,8 +74,8 @@ if (isset($_SESSION['userID'])) {
                                         </p>
                                     </div>
                                     <div class="col-4">
-                                        <?php if (isset($_SESSION['id'])) {
-                                                if ($_SESSION['id'] == $row['user_id']) : ?>
+                                        <?php if (isset($_SESSION['userID'])) {
+                                                if ($_SESSION['userID'] == $row['user_id']) : ?>
 
                                         <div class="row">
                                             <div class="col-lg-8 col-md-3 col-sm-4"></div>
@@ -87,8 +87,10 @@ if (isset($_SESSION['userID'])) {
                                             </div>
                                             <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
                                                 data-target="#confirmDeleteQuestionModal">
-                                                <button class="btn btn-danger px-3">
+                                                <button class="btn btn-danger px-3 deleteQuestionBtn">
                                                     <i class="far fa-trash-alt "></i>
+                                                    <input type="number" class="d-none"
+                                                        value="<?= $_GET['question'] ?>">
                                                 </button>
                                             </div>
                                         </div>
@@ -96,6 +98,7 @@ if (isset($_SESSION['userID'])) {
                                                 endif;
                                             } ?>
                                     </div>
+
                                 </div>
                                 <p class="card-text text-justify"><?= $row['content'] ?></p>
                             </div>

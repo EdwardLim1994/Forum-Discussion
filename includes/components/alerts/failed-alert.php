@@ -41,7 +41,13 @@ if (isset($_GET['reason'])) {
             $body = "Your answer cannot be posted due to technical issue. Please try again";
             break;
         case ("cannotcreatevoterecord"):
+            $headline = "Failed to Create Vote Record";
+            $body = "Your answer cannot be posted due to failure of creating vote record. Please try again ";
+            break;
 
+        case ("failedtodeleteanswer"):
+            $headline = "Failed to Delete Answer";
+            $body = "Your answer cannot be deleted due to technical issue. Please try again ";
             break;
     }
 }

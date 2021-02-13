@@ -22,6 +22,14 @@ if (isset($_GET['success'])) {
             $headline = "Success to Post Answer";
             $body = "Your answer has been successfully posted";
             break;
+        case ("successtodeleteanswer"):
+            $headline = "Success to Delete Answer";
+            $body = "Your answer has been successfully deleted";
+            break;
+        case ("successtodeletequestion"):
+            $headline = "Success to Delete Question";
+            $body = "Your question has been successfully deleted";
+            break;
     }
 }
 ?>

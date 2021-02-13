@@ -1,6 +1,6 @@
 <?php
 
-$rowsPerPage = 2;
+$rowsPerPage = 20;
 
 $sql = "SELECT * FROM Answer";
 $result = mysqli_query($conn, $sql);
@@ -15,10 +15,12 @@ if (isset($_GET['page'])) {
 
 $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
-$sql = "SELECT a.id, a.answer, a.postdate, u.username 
+$questionID = $_GET['question'];
+$sql = "SELECT a.id, a.answer, a.postdate, a.user_id, u.username 
         FROM Answer as a
         LEFT JOIN User as u 
-        ON a.user_id = u.id
+        ON a.user_id = u.id 
+        WHERE a.question_id = $questionID
         LIMIT $thisPageFirstRow, $rowsPerPage";
 
 $result = mysqli_query($conn, $sql);
@@ -32,18 +34,16 @@ if (mysqli_num_rows($result) > 0) :
             <div class="row">
                 <div class="col-8">
                     <h5 class="card-title"><?= $row['username'] ?></h5>
-                    <p class="card-title"><?= date("Y-m-d g:ia", strtotime($row['postdate'])) ?></p>
+                    <p class="card-text">
+                        <strong><?= date("Y-m-d g:ia", strtotime($row['postdate'])) ?></strong>
+                    </p>
                 </div>
                 <div class="col-4">
                     <div class="row">
                         <div class="col-lg-6 col-md-3"></div>
-                        <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                            <button class="btn btn-pink px-3 text-white">
-                                <i class="fas fa-heart"></i>
-                                <span>15</span>
-                            </button>
-                        </div>
-                        <?php if ($hasLogin) : ?>
+                        <?php if ($hasLogin) :
+                                    if ($_SESSION['userID'] == $row['user_id']) :
+                                ?>
                         <div class="col-lg-2 col-md-3 col-sm-4 text-center">
                             <button class="btn btn-default px-3" data-toggle="modal" data-target="#editAnswerModal">
                                 <i class="fas fa-edit"></i>
@@ -51,24 +51,33 @@ if (mysqli_num_rows($result) > 0) :
                         </div>
                         <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
                             data-target="#confirmDeleteAnswerModal">
-                            <button class="btn btn-danger px-3">
+                            <button class="btn btn-danger px-3 deleteAnswerBtn">
                                 <i class="far fa-trash-alt "></i>
+                                <input type="number" class="d-none" value="<?= $row['id'] ?>">
                             </button>
                         </div>
-                        <?php else : ?>
+                        <?php endif;
+                                else : ?>
+
                         <div class="col-lg-4 col-md-6 col-sm-8">
                         </div>
                         <?php endif; ?>
+                        <div class="col-lg-2 col-md-3 col-sm-4 text-center">
+                            <button class="btn btn-pink px-3 text-white">
+                                <i class="fas fa-heart"></i>
+                                <span>15</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <p class="card-text text-justify"><?= $row['answer'] ?></p>
         </div>
+
     </div>
 </div>
 <?php
     endwhile;
-
 else :
     ?>
 <div class="row py-1 text-center">
@@ -76,6 +85,6 @@ else :
         <h3>No Answer Yet</h3>
     </div>
 </div>
-
-
 <?php endif; ?>
+
+<script src="./dist/onclick-selector.prod.js"></script>
