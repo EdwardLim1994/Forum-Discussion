@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS Answer (
     id INT NOT NULL AUTO_INCREMENT,
     answer VARCHAR(10000) NOT NULL,
     postdate DATETIME NOT NULL,
+    vote INT NOT NULL DEFAULT 0,
     user_id INT NOT NULL,
     question_id INT NOT NULL,
     PRIMARY KEY (id),

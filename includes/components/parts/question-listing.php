@@ -69,6 +69,7 @@ if (isset($_GET['searchKeyword'])) {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) :
+        $doesListingExist = true;
         while ($row = mysqli_fetch_assoc($result)) :
         ?>
 
@@ -88,6 +89,7 @@ if (isset($_GET['searchKeyword'])) {
 <?php
         endwhile;
     else :
+        $doesListingExist = false;
         ?>
 <div class="row my-2 text-center">
     <div class="card p-3 hoverable">

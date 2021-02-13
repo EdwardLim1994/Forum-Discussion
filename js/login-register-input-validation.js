@@ -101,13 +101,18 @@ $(document).ready(function () {
     var passwordMatch = false;
     var passwordMatchEmpty = true;
     $("#passwordConfirm").on("input focusout", function () {
-        if ($("#registerPassword").val() != "") {
+        if ($("#passwordConfirm").val() != "") {
             passwordMatchEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#passwordConfirm").val())) {
-                validInput("#passwordConfirm", "#passwordConfirmValidate");
-                passwordMatch = true;
+                if ($("#registerPassword").val() === $("#passwordConfirm").val()) {
+                    validInput("#passwordConfirm", "#passwordConfirmValidate");
+                    passwordMatch = true;
+                } else {
+                    notValidInput("#passwordConfirm", "#passwordConfirmValidate", "Password is not matched");
+                    passwordMatch = false;
+                }
             } else {
-                notValidInput("#passwordConfirm", "#passwordConfirmValidate", "Password is not matched");
+                notValidInput("#passwordConfirm", "#passwordConfirmValidate", "Password should contains at least 6 characters with digits and alphabert");
                 passwordMatch = false;
             }
         } else {

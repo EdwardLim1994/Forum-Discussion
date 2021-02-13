@@ -2,27 +2,27 @@
 session_start();
 if (isset($_POST['questionSubmit'])) {
 
-    if (isset($_SESSION['id'])) {
+    if (isset($_SESSION['userID'])) {
 
         $title = $_POST["questionTitle"];
         $content = addslashes($_POST["questionContent"]);
-        $user_id = $_SESSION['id'];
+        $user_id = $_SESSION['userID'];
 
         require_once '../connectDB.php';
 
         $sql = "INSERT INTO Question (title, content, postdate, user_id) VALUES ('$title', '$content', NOW(), '$user_id')";
 
         if (mysqli_query($conn, $sql)) {
-            header("location: ../../../list.php?page=1&success=successtopostquestion");
+            header("location: " . $_SESSION['currentUrl'] . "&success=successtopostquestion");
             mysqli_close($conn);
             exit();
         } else {
-            header("location: ../../../list.php?page=1&reason=failedtopostquestion");
+            header("location: " . $_SESSION['currentUrl'] . "&reason=failedtopostquestion");
             mysqli_close($conn);
             exit();
         }
     }
 } else {
-    header("location: ../../../list.php?page=1&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
     exit();
 }

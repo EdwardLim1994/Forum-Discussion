@@ -16,17 +16,24 @@ if (isset($_GET['page'])) {
 $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
 $questionID = $_GET['question'];
-$sql = "SELECT a.id, a.answer, a.postdate, a.user_id, u.username 
+$sql_answer = "SELECT a.id, a.answer, a.postdate, a.vote, a.user_id, u.username 
         FROM Answer as a
         LEFT JOIN User as u 
         ON a.user_id = u.id 
         WHERE a.question_id = $questionID
         LIMIT $thisPageFirstRow, $rowsPerPage";
 
-$result = mysqli_query($conn, $sql);
-
+$result = mysqli_query($conn, $sql_answer);
 if (mysqli_num_rows($result) > 0) :
+    $doesListingExist = true;
     while ($row = mysqli_fetch_assoc($result)) :
+        $currentUserID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
+
+        $sql_vote = "SELECT FOUND_ROWS() FROM Vote WHERE answer_id = " . $row['id'] . " AND user_id = " . $currentUserID;
+        $result_vote = mysqli_query($conn, $sql_vote);
+
+        $voteStatus = mysqli_num_rows($result_vote) > 0 ? "btn-pink" : "btn-grey";
+
 ?>
 <div class="row py-1">
     <div class="card p-3">
@@ -70,22 +77,22 @@ if (mysqli_num_rows($result) > 0) :
                         </div>
                         <?php endif; ?>
                         <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                            <button class="btn btn-pink px-3 text-white">
+                            <button class="btn px-3 text-white voteBtn <?= $voteStatus ?>">
                                 <i class="fas fa-heart"></i>
-                                <span>15</span>
+                                <span id="vote-<?= $row['id'] . "-" . $currentUserID ?>"><?= $row['vote'] ?></span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="card-text text-justify" id="answerContent-<?= $row['id'] ?>"><?= $row['answer'] ?></p>
+            <p class=" card-text text-justify" id="answerContent-<?= $row['id'] ?>"><?= $row['answer'] ?></p>
         </div>
-
     </div>
 </div>
 <?php
     endwhile;
 else :
+    $doesListingExist = false;
     ?>
 <div class="row py-1 text-center">
     <div class="card p-3 hoverable">
@@ -95,3 +102,4 @@ else :
 <?php endif; ?>
 
 <script src="./dist/onclick-selector.prod.js"></script>
+<script src="./dist/voting-logic.prod.js"></script>

@@ -3,7 +3,7 @@ session_start();
 require_once './includes/functions/connectDB.php';
 
 $pageTitle = "Question";
-
+$doesListingExist = false;
 $_SESSION['currentUrl'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0] . "?page=" . $_GET['page'] . "&question=" . $_GET['question'];
 
 if (isset($_SESSION['userID'])) {

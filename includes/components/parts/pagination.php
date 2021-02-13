@@ -25,7 +25,7 @@
         <?php endif; ?>
         <?php endfor; ?>
 
-        <?php if ($_GET['page'] == $pageNum) : ?>
+        <?php if ($_GET['page'] == $pageNum or $doesListingExist == false) : ?>
         <li class="page-item disabled">
             <a class="page-link" tabindex="-1">Next</a>
         </li>

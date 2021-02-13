@@ -25,7 +25,6 @@ if (isset($_POST['register'])) {
             $_SESSION['userID'] = $currentid;
             $_SESSION['username'] = $currentUsername;
             header("location: " . $_SESSION['currentUrl']);
-            //header("location: ../../../list.php?page=1");
             mysqli_close($conn);
             exit();
         } else {

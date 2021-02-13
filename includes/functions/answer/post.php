@@ -10,24 +10,9 @@ if (isset($_POST['answerSubmit'])) {
     $sql = "INSERT INTO Answer (answer, postdate, user_id, question_id) VALUES ('$answer', NOW(), '$userID', '$questionID')";
 
     if (mysqli_query($conn, $sql)) {
-
-        $last_id = mysqli_insert_id($conn);
-
-        $sql = "INSERT IGNORE INTO Vote (user_id, answer_id) VALUES ('$userID', '$last_id')";
-
-        if (mysqli_query($conn, $sql)) {
-            header("location: " . $_SESSION['currentUrl'] . "&success=successtopostanswer");
-            mysqli_close($conn);
-            exit();
-        } else {
-
-            $sql = "DELETE FROM Answer WHERE answer_id = $last_id";
-            mysqli_query($conn, $sql);
-
-            header("location: " . $_SESSION['currentUrl'] . "&reason=cannotcreatevoterecord");
-            mysqli_close($conn);
-            exit();
-        }
+        header("location: " . $_SESSION['currentUrl'] . "&success=successtopostanswer");
+        mysqli_close($conn);
+        exit();
     } else {
 
         header("location: " . $_SESSION['currentUrl'] . "&reason=failedtopostanswer");
