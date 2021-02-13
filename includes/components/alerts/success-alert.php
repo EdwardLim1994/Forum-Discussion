@@ -1,12 +1,3 @@
-<!--
-Post Question
-Edit Question
-Delete Question
-Post Answer
-Edit Answer
-Delete Answer 
--->
-
 <?php
 $headline = "";
 $body = "";

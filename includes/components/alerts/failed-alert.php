@@ -1,15 +1,3 @@
-<!-- 
-cannotreceivepostdata
-Login               passwordnotmatch    usernotexist
-Register            autologinfailed     cannotinsertuserdataintodatabase
-Post Question
-Edit Question
-Delete Question
-Post Answer
-Edit Answer
-Delete Answer 
--->
-
 <?php
 $headline = "";
 $body = "";
