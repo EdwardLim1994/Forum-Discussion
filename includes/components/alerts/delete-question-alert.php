@@ -1,7 +1,7 @@
 <div class="modal fade" id="confirmDeleteQuestionModal" tabindex="-1" role="dialog"
     aria-labelledby="confirmDeleteQuestionModal" aria-hidden="true">
     <form action="./includes/functions/question/delete.php" method="POST">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-notify modal-warning" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Delete Question Alert</h5>
@@ -15,7 +15,7 @@
                 </div>
                 <input id="deleteQuestionID" name="deleteQuestionID" type="number" style="display: none">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
                     <button type="submit" name="deleteQuestionSubmit" class="btn btn-danger">Yes</button>
                 </div>
             </div>

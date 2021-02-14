@@ -1,6 +1,4 @@
 <?php
-$headline = "";
-$body = "";
 
 if (isset($_GET['success'])) {
     switch ($_GET['success']) {

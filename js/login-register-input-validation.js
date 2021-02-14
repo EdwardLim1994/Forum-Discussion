@@ -20,13 +20,13 @@ $(document).ready(function () {
     var usernameRegisterCorrect = false;
     var usernameRegisterEmpty = true;
     $("#registerUsername").on("input focusout", function () {
-        if ($("#registerUsername").val() != "") {
+        if ($("#registerUsername").val()) {
             usernameRegisterEmpty = false;
 
             if (/^[a-zA-Z].*/.test($("#registerUsername").val())) {
                 $.ajax({
                     method: "POST",
-                    url: "./includes/functions/search/checkUsername.php",
+                    url: "./includes/functions/account/checkUsername.php",
                     data: {
                         username_ajax: $("#registerUsername").val()
                     },
@@ -58,7 +58,7 @@ $(document).ready(function () {
     var emailRegisterCorrect = false;
     var emailRegisterEmpty = true;
     $("#registerEmail").on("input focusout", function () {
-        if ($("#registerEmail").val() != "") {
+        if ($("#registerEmail").val()) {
 
             emailRegisterEmpty = false;
             if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($("#registerEmail").val())) {
@@ -79,7 +79,7 @@ $(document).ready(function () {
     var passwordRegisterCorrect = false;
     var passwordRegisterEmpty = true;
     $("#registerPassword").on("input focusout", function () {
-        if ($("#registerPassword").val() != "") {
+        if ($("#registerPassword").val()) {
 
             passwordRegisterEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#registerPassword").val())) {
@@ -101,7 +101,7 @@ $(document).ready(function () {
     var passwordMatch = false;
     var passwordMatchEmpty = true;
     $("#passwordConfirm").on("input focusout", function () {
-        if ($("#passwordConfirm").val() != "") {
+        if ($("#passwordConfirm").val()) {
             passwordMatchEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#passwordConfirm").val())) {
                 if ($("#registerPassword").val() === $("#passwordConfirm").val()) {
@@ -124,6 +124,7 @@ $(document).ready(function () {
 
     $("#registerForm").submit(function (event) {
         //Final Validation
+
         if (usernameRegisterCorrect && emailRegisterCorrect && passwordRegisterCorrect && passwordMatch) {
             return true;
         } else if (usernameRegisterEmpty && emailRegisterEmpty && passwordRegisterEmpty && passwordMatchEmpty) {
@@ -147,14 +148,14 @@ $(document).ready(function () {
     var usernameLoginCorrect = false;
     var usernameLoginEmpty = true;
     $("#loginUsername").on("input focusout", function () {
-        if ($("#loginUsername").val() != "") {
+        if ($("#loginUsername").val()) {
 
             usernameLoginEmpty = false;
             if (/^[a-zA-Z].*/.test($("#loginUsername").val())) {
 
                 $.ajax({
                     method: "POST",
-                    url: "./includes/functions/search/checkUsername.php",
+                    url: "./includes/functions/account/checkUsername.php",
                     data: {
                         username_ajax: $("#loginUsername").val()
                     },
@@ -185,7 +186,7 @@ $(document).ready(function () {
     var passwordLoginCorrect = false;
     var passwordLoginEmpty = true;
     $("#loginPassword").on("input focusout", function () {
-        if ($("#loginPassword").val() != "") {
+        if ($("#loginPassword").val()) {
             passwordLoginEmpty = false;
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#loginPassword").val())) {
                 validInput("#loginPassword", "#loginPasswordValidate");
@@ -224,11 +225,11 @@ $(document).ready(function () {
 
         if ($(inputID).attr("type") === "password") {
             $(inputID).attr("type", "text");
-            $(toggleID + " .fas").removeClass("fa-eye-slash").addClass("fa-eye");
+            $(toggleID + " .fas").removeClass("fa-eye").addClass("fa-eye-slash");
 
         } else {
             $(inputID).attr("type", "password");
-            $(toggleID + " .fas").removeClass("fa-eye").addClass("fa-eye-slash");
+            $(toggleID + " .fas").removeClass("fa-eye-slash").addClass("fa-eye");
         }
     }
 

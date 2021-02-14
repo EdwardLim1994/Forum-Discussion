@@ -15,11 +15,11 @@ if (isset($_POST['answerSubmit'])) {
         mysqli_close($conn);
         exit();
     } else {
-        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtoeditanswer");
+        header("location: " . $_SESSION['currentUrl'] . "&failed=failedtoeditanswer");
         mysqli_close($conn);
         exit();
     }
 } else {
-    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&failed=cannotreceivepostdata");
     exit();
 }

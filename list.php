@@ -23,27 +23,7 @@ if (isset($_SESSION['userID'])) {
             <?php include "./includes/components/parts/header.php"; ?>
             <?php include "./includes/components/parts/search-post-question-button.php"; ?>
         </header>
-
         <main>
-
-
-            <?php
-
-
-        if ($hasLogin) :
-            include "./includes/components/alerts/logout-alert.php";
-            include "./includes/components/modals/post-question-modal.php";
-
-            if (isset($_GET['success'])) :
-                include "./includes/components/alerts/success-alert.php";
-            endif;
-        else :
-            include "./includes/components/modals/login-register-modal.php";
-            include "./includes/components/alerts/failed-alert.php";
-        endif;
-        ?>
-
-
             <div class="container">
                 <section class="py-2">
                     <?php include "./includes/components/parts/question-listing.php"; ?>
@@ -58,7 +38,24 @@ if (isset($_SESSION['userID'])) {
 
         <?php
     include "./includes/components/parts/footer.php";
-    include_once "./includes/functions/closeDB.php";
+
+
+    if ($hasLogin) :
+        include "./includes/components/alerts/logout-alert.php";
+        include "./includes/components/modals/post-question-modal.php";
+
+        if (isset($_GET['success'])) :
+            include "./includes/components/alerts/success-alert.php";
+        endif;
+        if (isset($_GET['failed'])) :
+            include "./includes/components/alerts/failed-alert.php";
+        endif;
+    else :
+        include "./includes/components/modals/login-register-modal.php";
+        include "./includes/components/alerts/failed-alert.php";
+    endif;
+
+    mysqli_close($conn);
     ?>
     </body>
 

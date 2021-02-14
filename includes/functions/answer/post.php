@@ -15,12 +15,12 @@ if (isset($_POST['answerSubmit'])) {
         exit();
     } else {
 
-        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtopostanswer");
+        header("location: " . $_SESSION['currentUrl'] . "&failed=failedtopostanswer");
         mysqli_close($conn);
         exit();
     }
 } else {
 
-    header("location: ../../../forum.php?question=" . $_SESSION['currentQuestionID'] . "&reason=cannotreceivepostdata");
+    header("location: ../../../forum.php?question=" . $_SESSION['currentQuestionID'] . "&failed=cannotreceivepostdata");
     exit();
 }

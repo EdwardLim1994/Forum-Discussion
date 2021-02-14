@@ -25,36 +25,13 @@ if (isset($_SESSION['userID'])) {
             <?php include "./includes/components/parts/header.php"; ?>
         </header>
         <main>
-            <?php if ($hasLogin) :
-            include "./includes/components/alerts/logout-alert.php";
-            include "./includes/components/alerts/failed-alert.php";
-            include "./includes/components/modals/edit-question-modal.php";
-            include "./includes/components/modals/delete-question-alert.php";
-            include "./includes/components/modals/edit-answer-modal.php";
-            include "./includes/components/modals/delete-answer-alert.php";
-
-            if (isset($_GET['success'])) :
-                include "./includes/components/alerts/success-alert.php";
-            endif;
-        else :
-
-            include "./includes/components/modals/login-register-modal.php";
-            include "./includes/components/alerts/failed-alert.php";
-
-        endif; ?>
-
             <div class="container py-2">
-
                 <?php
-
-            $questionID = $_GET['question'];
-
-
             $sql = "SELECT q.id, q.title, q.content, q.postdate, q.user_id, u.username 
                         FROM Question as q 
                         LEFT JOIN User as u 
                         ON q.user_id = u.id 
-                        WHERE q.id = '$questionID'";
+                        WHERE q.id = " . $_GET['question'];
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) :
@@ -162,7 +139,29 @@ if (isset($_SESSION['userID'])) {
         </main>
         <?php
     include "./includes/components/parts/footer.php";
-    include_once "./includes/functions/closeDB.php";
+
+    if ($hasLogin) :
+        include "./includes/components/alerts/logout-alert.php";
+        include "./includes/components/alerts/failed-alert.php";
+        include "./includes/components/alerts/delete-answer-alert.php";
+        include "./includes/components/alerts/delete-question-alert.php";
+        include "./includes/components/modals/edit-answer-modal.php";
+        include "./includes/components/modals/edit-question-modal.php";
+
+
+        if (isset($_GET['success'])) :
+            include "./includes/components/alerts/success-alert.php";
+        endif;
+        if (isset($_GET['failed'])) :
+            include "./includes/components/alerts/failed-alert.php";
+        endif;
+    else :
+
+        include "./includes/components/modals/login-register-modal.php";
+        include "./includes/components/alerts/failed-alert.php";
+
+    endif;
+    mysqli_close($conn);
     ?>
 
     </body>

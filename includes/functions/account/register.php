@@ -28,16 +28,16 @@ if (isset($_POST['register'])) {
             mysqli_close($conn);
             exit();
         } else {
-            header("location: " . $_SESSION['currentUrl'] . "&reason=autologinfailed");
+            header("location: " . $_SESSION['currentUrl'] . "&failed=autologinfailed");
             mysqli_close($conn);
             exit();
         }
     } else {
-        header("location: " . $_SESSION['currentUrl'] . "&reason=cannotinsertuserdataintodatabase");
+        header("location: " . $_SESSION['currentUrl'] . "&failed=cannotinsertuserdataintodatabase");
         mysqli_close($conn);
         exit();
     }
 } else {
-    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&failed=cannotreceivepostdata");
     exit();
 }

@@ -26,12 +26,12 @@ if (isset($_POST['login'])) {
             mysqli_close($conn);
             exit();
         } else {
-            header("location: " . $_SESSION['currentUrl'] . "&reason=passwordnotmatch");
+            header("location: " . $_SESSION['currentUrl'] . "&failed=passwordnotmatch");
             mysqli_close($conn);
             exit();
         }
     }
 } else {
-    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&failed=cannotreceivepostdata");
     exit();
 }

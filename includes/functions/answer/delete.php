@@ -15,11 +15,11 @@ if (isset($_POST['deleteAnswerSubmit'])) {
         mysqli_close($conn);
         exit();
     } else {
-        header("location: " . $_SESSION['currentUrl'] . "&reason=failedtodeleteanswer");
+        header("location: " . $_SESSION['currentUrl'] . "&failed=failedtodeleteanswer");
         mysqli_close($conn);
         exit();
     }
 } else {
-    header("location: " . $_SESSION['currentUrl'] . "&reason=cannotreceivepostdata");
+    header("location: " . $_SESSION['currentUrl'] . "&failed=cannotreceivepostdata");
     exit();
 }

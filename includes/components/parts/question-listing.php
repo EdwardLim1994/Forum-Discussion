@@ -17,18 +17,18 @@ $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
 if (isset($_GET['searchKeyword'])) {
 
-    $search = $_GET['searchKeyword'];
+
     $sql = "SELECT q.id, q.title, q.content, q.postdate, u.username 
             FROM Question as q 
             LEFT JOIN User as u 
             ON q.user_id = u.id 
-            WHERE q.title LIKE %'$search'% OR q.content LIKE %'$search'% 
+            WHERE q.title LIKE '%" . addslashes($_GET['searchKeyword']) . "%'
             ORDER BY q.postdate DESC
             LIMIT $thisPageFirstRow, $rowsPerPage";
     $result = mysqli_query($conn, $sql);
 ?>
 <div class="row py-2">
-    <h5>You are searching : <?= $search ?></h5>
+    <h5>You are searching : <?= addslashes($_GET['searchKeyword']) ?></h5>
 </div>
 <?php
     if (mysqli_num_rows($result) > 0) :

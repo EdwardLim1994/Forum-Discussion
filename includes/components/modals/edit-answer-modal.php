@@ -1,13 +1,13 @@
 <div class="modal fade" id="editAnswerModal" tabindex="-1" role="dialog" aria-labelledby="editAnswerModal"
     aria-hidden="true">
     <form action="./includes/functions/answer/edit.php" method="POST">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-notify modal-info" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Edit Answer</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body mx-3">
                     <div class="form-group">
@@ -18,7 +18,8 @@
                 </div>
                 <input type="text" class="d-none" id="editAnswerID" name="editAnswerID">
                 <div class="modal-footer d-flex justify-content-right">
-                    <button type="submit" name="answerSubmit" class="btn btn-default text-white">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" name="answerSubmit" class="btn btn-info text-white">Save</button>
                 </div>
             </div>
         </div>

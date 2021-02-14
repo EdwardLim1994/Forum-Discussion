@@ -15,12 +15,11 @@ if (isset($_GET['page'])) {
 
 $thisPageFirstRow = ($page - 1) * $rowsPerPage;
 
-$questionID = $_GET['question'];
 $sql_answer = "SELECT a.id, a.answer, a.postdate, a.vote, a.user_id, u.username 
         FROM Answer as a
         LEFT JOIN User as u 
         ON a.user_id = u.id 
-        WHERE a.question_id = $questionID
+        WHERE a.question_id = " . $_GET['question'] . "
         LIMIT $thisPageFirstRow, $rowsPerPage";
 
 $result = mysqli_query($conn, $sql_answer);
@@ -101,5 +100,8 @@ else :
 </div>
 <?php endif; ?>
 
+<?php if ($hasLogin) : ?>
 <script src="./dist/onclick-selector.prod.js"></script>
+<?php endif; ?>
+
 <script src="./dist/voting-logic.prod.js"></script>

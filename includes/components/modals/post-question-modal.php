@@ -1,13 +1,13 @@
 <div class="modal fade" id="postQuestionModal" tabindex="-1" role="dialog" aria-labelledby="postQuestionModal"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-notify modal-info" role="document">
         <form action="./includes/functions/question/post.php" method="POST" name="questionSubmit">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Post a Question</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body mx-3">
                     <div class="form-group">
@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-right">
-                    <button type="submit" name="questionSubmit" class="btn btn-default text-white">Post</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" name="questionSubmit" class="btn btn-info text-white">Post</button>
                 </div>
             </div>
         </form>

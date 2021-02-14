@@ -1,8 +1,6 @@
 <?php
-$headline = "";
-$body = "";
-if (isset($_GET['reason'])) {
-    switch ($_GET['reason']) {
+if (isset($_GET['failed'])) {
+    switch ($_GET['failed']) {
         case ("autologinfailed"):
             $headline = "Auto Login Failed";
             $body = "Your account has been successfully registered, but some technical issues occur. Please login again manually";
@@ -77,7 +75,7 @@ if (isset($_GET['reason'])) {
     </div>
 </div>
 
-<?php if (isset($_GET['reason'])) :  ?>
+<?php if (isset($_GET['failed'])) :  ?>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#failedToModal').modal('show');

@@ -1,12 +1,7 @@
 <div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="loginRegisterModal"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-notify modal-info">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs row" id="myTab" role="tablist">
                     <li class="nav-item col-6 text-center">
@@ -52,7 +47,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <a id="loginPasswordVisible">
-                                                    <i class="fas fa-eye-slash"></i>
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -61,8 +56,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" name="login">Login</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-info" name="login">Login</button>
                             </div>
                         </form>
                     </div>
@@ -108,7 +103,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <a id="registerPasswordVisible">
-                                                    <i class="fas fa-eye-slash"></i>
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
 
                                             </div>
@@ -129,7 +124,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <a id="registerConfirmPasswordVisible">
-                                                    <i class="fas fa-eye-slash"></i>
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
 
                                             </div>
@@ -139,8 +134,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button name="register" class="btn btn-primary">Register</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button name="register" class="btn btn-info">Register</button>
                             </div>
                         </form>
                     </div>
