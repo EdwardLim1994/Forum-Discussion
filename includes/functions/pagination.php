@@ -1,6 +1,6 @@
 <?php
     //Set number of question to be rendered in single page
-    $rowsPerPage = 20;
+    $rowsPerPage = 10;
     $result = mysqli_query($conn, $sql);
 
     //Count the total question existing in database
