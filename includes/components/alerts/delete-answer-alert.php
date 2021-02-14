@@ -13,7 +13,6 @@
                     Are you sure you want to delete this answer?
                 </div>
                 <input type="number" class="d-none" id="deleteAnswerID" name="deleteAnswerID" />
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
                     <button type="submit" name="deleteAnswerSubmit" class="btn btn-danger">Yes</button>

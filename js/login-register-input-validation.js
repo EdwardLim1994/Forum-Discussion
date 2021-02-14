@@ -1,29 +1,34 @@
 $(document).ready(function () {
-    //Visible Password Field
 
+    //Trigger password visible button event to show or hide password input
     $('#loginPasswordVisible').click(function () {
         toggleVisiblePassword("#loginPasswordVisible", "#loginPassword");
     });
-
     $("#registerPasswordVisible").click(function () {
         toggleVisiblePassword("#registerPasswordVisible", "#registerPassword");
     });
-
     $("#registerConfirmPasswordVisible").click(function () {
         toggleVisiblePassword("#registerConfirmPasswordVisible", "#passwordConfirm");
     });
 
-
     //Syntax Validation Logic for User Registration
-
     //Validate Username
     var usernameRegisterCorrect = false;
     var usernameRegisterEmpty = true;
+
+    //Trigger current register username input event
     $("#registerUsername").on("input focusout", function () {
+
+        //If current register username input is empty, set invalid message and flag
         if ($("#registerUsername").val()) {
+
+            //Set flag to emphasize that current register username input is not empty
             usernameRegisterEmpty = false;
 
+            //If current match password input is NOT following the pattern, set invalid message and flag
             if (/^[a-zA-Z].*/.test($("#registerUsername").val())) {
+
+                //Trigger Ajax function to check whether current register username input exists inside the database or not
                 $.ajax({
                     method: "POST",
                     url: "./includes/functions/account/checkUsername.php",
@@ -31,6 +36,8 @@ $(document).ready(function () {
                         username_ajax: $("#registerUsername").val()
                     },
                     success: function (result) {
+
+                        //If current register username input DOES NOT exists inside database, set valid message and flag, otherwise set invalid message and flag
                         if (result) {
                             validInput("#registerUsername", "#registerUsernameValidate");
                             usernameRegisterCorrect = true;
@@ -46,7 +53,6 @@ $(document).ready(function () {
                     "Username usually don't start from digit");
                 usernameRegisterCorrect = false;
             }
-
         } else {
             notValidInput("#registerUsername", "#registerUsernameValidate", "Cannot leave blank!");
             usernameRegisterCorrect = false;
@@ -57,10 +63,17 @@ $(document).ready(function () {
     //Validate Email
     var emailRegisterCorrect = false;
     var emailRegisterEmpty = true;
+
+    //Trigger current register email input event
     $("#registerEmail").on("input focusout", function () {
+
+        //If current register email input is empty, set invalid message and empty flag
         if ($("#registerEmail").val()) {
 
+            //Set flag to emphasize that current register email input is not empty
             emailRegisterEmpty = false;
+
+            //If current register email input is following the pattern, set valid message and flag, otherwise set invalid message and flag
             if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($("#registerEmail").val())) {
                 validInput("#registerEmail", "#registerEmailValidate");
                 emailRegisterCorrect = true;
@@ -78,10 +91,17 @@ $(document).ready(function () {
     //Validate Password
     var passwordRegisterCorrect = false;
     var passwordRegisterEmpty = true;
+
+    //Trigger current register password input event
     $("#registerPassword").on("input focusout", function () {
+
+        //If current register password input is empty, set invalid message and empty flag
         if ($("#registerPassword").val()) {
 
+            //Set flag to emphasize that current register password input is not empty
             passwordRegisterEmpty = false;
+
+            //If current register password input is following the pattern, set valid message and flag, otherwise set invalid message and flag
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#registerPassword").val())) {
                 validInput("#registerPassword", "#registerPasswordValidate");
                 passwordRegisterCorrect = true;
@@ -100,10 +120,20 @@ $(document).ready(function () {
     //Confirm Password
     var passwordMatch = false;
     var passwordMatchEmpty = true;
+
+    //Trigger current match password input event
     $("#passwordConfirm").on("input focusout", function () {
+
+        //If current match password input is empty, set invalid message and empty flag
         if ($("#passwordConfirm").val()) {
+
+            //Set flag to emphasize that current match password input is not empty
             passwordMatchEmpty = false;
+
+            //If current match password input is NOT following the pattern, set invalid message and flag
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#passwordConfirm").val())) {
+
+                //If current match password input is not equal to current register password input, set valid message and flag, otherwise set invalid message and flag
                 if ($("#registerPassword").val() === $("#passwordConfirm").val()) {
                     validInput("#passwordConfirm", "#passwordConfirmValidate");
                     passwordMatch = true;
@@ -122,11 +152,14 @@ $(document).ready(function () {
         }
     });
 
+    //Trigger register form submit event
     $("#registerForm").submit(function (event) {
-        //Final Validation
 
+        //If all input is valid, allow successful submit, otherwise don't allow submit
         if (usernameRegisterCorrect && emailRegisterCorrect && passwordRegisterCorrect && passwordMatch) {
             return true;
+
+        //If all input is empty, don't allow submit, and set invalid notification
         } else if (usernameRegisterEmpty && emailRegisterEmpty && passwordRegisterEmpty && passwordMatchEmpty) {
             notValidInput("#registerUsername", "#registerUsernameValidate", "Cannot leave blank!");
             notValidInput("#registerEmail", "#registerEmailValidate", "Cannot leave blank!");
@@ -142,17 +175,25 @@ $(document).ready(function () {
         }
     });
 
-    //Syntax Validation Logic for User Login
 
+    //Syntax Validation Logic for User Login
     //Validate Username
     var usernameLoginCorrect = false;
     var usernameLoginEmpty = true;
+
+    //Trigger current login username input event
     $("#loginUsername").on("input focusout", function () {
+
+        //If current login username input is empty, set invalid message and empty flag
         if ($("#loginUsername").val()) {
 
+            //Set flag to emphasize that current login username input is not empty
             usernameLoginEmpty = false;
+
+            //If current login username input is NOT following the pattern, set invalid message and flag
             if (/^[a-zA-Z].*/.test($("#loginUsername").val())) {
 
+                //Trigger Ajax function to check whether current login username input exists inside the database or not
                 $.ajax({
                     method: "POST",
                     url: "./includes/functions/account/checkUsername.php",
@@ -161,6 +202,7 @@ $(document).ready(function () {
                     },
                     success: function (result) {
 
+                        //If username DOES exist in database, set valid message and flag, otherwise set invalid message and flag
                         if (!result) {
                             validInput("#loginUsername", "#loginUsernameValidate");
                             usernameLoginCorrect = true;
@@ -185,9 +227,17 @@ $(document).ready(function () {
     //Validate Password
     var passwordLoginCorrect = false;
     var passwordLoginEmpty = true;
+
+    //Trigger current login password input event
     $("#loginPassword").on("input focusout", function () {
+
+        //If current login password input is empty, set invalid message and empty flag
         if ($("#loginPassword").val()) {
+
+            //Set flag to emphasize that current login password input is not empty
             passwordLoginEmpty = false;
+
+            //If current login password input is following the pattern, set valid message and flag, otherwise set invalid message and flag
             if (/^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/.test($("#loginPassword").val())) {
                 validInput("#loginPassword", "#loginPasswordValidate");
                 passwordLoginCorrect = true;
@@ -203,10 +253,13 @@ $(document).ready(function () {
         }
     });
 
+    //Trigger login form submit event
     $("#loginForm").submit(function (event) {
-        //Final Validation
+        //If all input is valid, allow successful submit, otherwise don't allow submit
         if (usernameLoginCorrect && passwordLoginCorrect) {
             return true;
+
+        //If all input is empty, don't allow submit, and set invalid notification
         } else if (usernameLoginEmpty && passwordLoginEmpty) {
             notValidInput("#loginUsername", "#loginUsernameValidate", "Cannot leave blank!");
             notValidInput("#loginPassword", "#loginPasswordValidate", "Cannot leave blank!");
@@ -220,13 +273,12 @@ $(document).ready(function () {
         }
     });
 
+
     //Toggle Visible Password Functions
     function toggleVisiblePassword(toggleID, inputID) {
-
         if ($(inputID).attr("type") === "password") {
             $(inputID).attr("type", "text");
             $(toggleID + " .fas").removeClass("fa-eye").addClass("fa-eye-slash");
-
         } else {
             $(inputID).attr("type", "password");
             $(toggleID + " .fas").removeClass("fa-eye-slash").addClass("fa-eye");

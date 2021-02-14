@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    'use strict';
 
-    var year = new Date().getFullYear();
-    $('#latestYear').text(year);
+    //Set current year for copyright
+    $('#latestYear').text(new Date().getFullYear());
 
+    //Trigger whatsapp button event
     $('.whatsappLink').on('click', function () {
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        if (isMobile) {
+        //If current device is on mobile, redirect to mobile based url, otherwise redirect to desktop based url
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             window.open(
                 "https://wa.me/+60126113810?text=I want to know more about Attendance System.",
                 "_blank");
@@ -17,5 +17,4 @@ $(document).ready(function () {
                 "_blank");
         }
     });
-
 })

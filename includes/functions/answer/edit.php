@@ -1,16 +1,22 @@
 <?php
+//start session
 session_start();
-if (isset($_POST['answerSubmit'])) {
 
+//If there is post request from Edit Answer form
+if (isset($_POST['editAnswerSubmit'])) {
+
+    //Create connection to database
     require_once "../connectDB.php";
 
-    $newAnswer = addslashes($_POST['editAnswerContent']);
-    $newAnswerID = $_POST['editAnswerID'];
+    //Set current answer ID and content
+    $answerID = $_POST['editAnswerID'];
+    $answerContent = addslashes($_POST['editAnswerContent']);
 
-    $sql = "UPDATE Answer SET answer = '$newAnswer' WHERE id = '$newAnswerID'";
+    //SQL to update current answer
+    $sql = "UPDATE Answer SET answer = '$answerContent' WHERE id = '$answerID'";
 
+    //If query is successful, redirect to current url with success parameter, otherwise redirect to current url with failed parameter
     if (mysqli_query($conn, $sql)) {
-
         header("location: " . $_SESSION['currentUrl'] . "&success=successtoeditanswer");
         mysqli_close($conn);
         exit();
