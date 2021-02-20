@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <p class=" card-text text-justify" id="answerContent-<?= $row['id'] ?>"><?= $row['answer'] ?></p>
+                            <p class=" card-text text-justify text-content" id="answerContent-<?= $row['id'] ?>"><?= $row['answer'] ?></p>
                         </div>
                     </div>
                 </div>

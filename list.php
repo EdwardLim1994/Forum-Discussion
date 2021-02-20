@@ -16,6 +16,9 @@
     //Set tab title
     $pageTitle = "List";
 
+    //Set number of question to be rendered in single page
+    $rowsPerPage = 1;
+
     //Global variable to store status about whether question is existed in database
     $doesListingExist = false;
 

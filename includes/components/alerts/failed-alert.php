@@ -24,11 +24,24 @@
                 break;
 
             //If it is "Login Password Not Match"
-            case ("passwordnotmatch"):
-                $headline = "Password Not Match";
-                $body = "Your login password is not matched with your account. Please try again";
+            case ("usernameorpasswordnotmatchfailedattempt"):
+                $string_chance = $_SESSION['attempt'] > 1 ? "chances" : "chance" ;
+                $headline = "Username/Email or Password Incorrect";
+                $body = "Your login username/email or password is incorrect. Please try again (You have <b>".$_SESSION['attempt']."</b> more $string_chance to login)";
                 break;
-            
+
+            //If it is "Login Password Not Match"
+            case ("usernamenotfound"):
+                $headline = "Username/Email Not Found";
+                $body = "Your login username/email is not found. Please try again";
+                break;
+
+            //If it is "Attempt To Login Too Many Times"
+            case ("attempttologintoomanytimes"):
+                $headline = "Your Account Has Been Locked Due to Too Many Failed Login Attempts";
+                $body = "Your account has been locked because you have too many failed login attempts. Please contant <a href='nightcatdigitalsolutions@gmail.com'>nightcatdigitalsolutions@gmail.com</a> to unlock your account";
+                break;
+
             //If it is "failed to Post Question"
             case ("failedtopostquestion"):
                 $headline = "Failed to Post Question";

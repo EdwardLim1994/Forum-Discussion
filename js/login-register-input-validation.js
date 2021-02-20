@@ -26,7 +26,7 @@ $(document).ready(function () {
             usernameRegisterEmpty = false;
 
             //If current match password input is NOT following the pattern, set invalid message and flag
-            if (/^[a-zA-Z].*/.test($("#registerUsername").val())) {
+            if (/(?!^\d+$)^.+$/.test($("#registerUsername").val())) {
 
                 //Trigger Ajax function to check whether current register username input exists inside the database or not
                 $.ajax({
@@ -50,7 +50,7 @@ $(document).ready(function () {
                 });
             } else {
                 notValidInput("#registerUsername", "#registerUsernameValidate",
-                    "Username usually don't start from digit");
+                    "Username should not contain digit only");
                 usernameRegisterCorrect = false;
             }
         } else {
@@ -77,6 +77,27 @@ $(document).ready(function () {
             if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($("#registerEmail").val())) {
                 validInput("#registerEmail", "#registerEmailValidate");
                 emailRegisterCorrect = true;
+
+                //Trigger Ajax function to check whether current register username input exists inside the database or not
+                $.ajax({
+                    method: "POST",
+                    url: "./includes/functions/account/checkEmail.php",
+                    data: {
+                        email_ajax: $("#registerEmail").val()
+                    },
+                    success: function (result) {
+
+                        //If current register username input DOES NOT exists inside database, set valid message and flag, otherwise set invalid message and flag
+                        if (result) {
+                            validInput("#registerEmail", "#registerEmailValidate");
+                            emailRegisterCorrect = true;
+                        } else {
+                            notValidInput("#registerEmail", "#registerEmailValidate",
+                                "Email has already been used");
+                            usernameRegisterCorrect = false;
+                        }
+                    }
+                });
             } else {
                 notValidInput("#registerEmail", "#registerEmailValidate", "Email format is not correct");
                 emailRegisterCorrect = false;
@@ -191,31 +212,12 @@ $(document).ready(function () {
             usernameLoginEmpty = false;
 
             //If current login username input is NOT following the pattern, set invalid message and flag
-            if (/^[a-zA-Z].*/.test($("#loginUsername").val())) {
-
-                //Trigger Ajax function to check whether current login username input exists inside the database or not
-                $.ajax({
-                    method: "POST",
-                    url: "./includes/functions/account/checkUsername.php",
-                    data: {
-                        username_ajax: $("#loginUsername").val()
-                    },
-                    success: function (result) {
-
-                        //If username DOES exist in database, set valid message and flag, otherwise set invalid message and flag
-                        if (!result) {
-                            validInput("#loginUsername", "#loginUsernameValidate");
-                            usernameLoginCorrect = true;
-                        } else {
-                            notValidInput("#loginUsername", "#loginUsernameValidate",
-                                "Username does not exist");
-                            usernameLoginCorrect = false;
-                        }
-                    }
-                });
+            if (/^[a-zA-Z].*/.test($("#loginUsername").val()) || /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($("#loginUsername").val())) {
+                validInput("#loginUsername", "#loginUsernameValidate");
+                usernameLoginCorrect = true;
             } else {
                 notValidInput("#loginUsername", "#loginUsernameValidate",
-                    "Username usually don't start from digit");
+                    "Username should not contain digit only");
                 usernameLoginCorrect = false;
             }
         } else {

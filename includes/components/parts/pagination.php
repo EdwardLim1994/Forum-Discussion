@@ -1,6 +1,24 @@
 <nav aria-label="Page navigation">
     <ul class="pagination pg-blue justify-content-center">
 
+    <!-- Render First Page Button -->
+    <?php if ($_GET['page'] == 1) : ?>
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1">
+                <span class="textBreak">First Page</span>
+                <span class="iconBreak"><i class="fas fa-step-backward"></i></span>
+            </a>
+        </li>
+    <?php else : ?>
+        <li class="page-item">
+            <a class="page-link"
+                href="<?= str_replace("page=" . $_GET['page'], "page=1", $_SESSION['currentUrl']); ?>">
+                <span class="textBreak">First Page</span>
+                <span class="iconBreak"><i class="fas fa-step-backward"></i></span>
+            </a>
+        </li>
+    <?php endif; ?>
+
     <!-- Render Previous Button -->
     <?php if ($_GET['page'] == 1) : ?>
         <li class="page-item disabled">
@@ -47,6 +65,24 @@
                 href="<?= str_replace("page=" . $_GET['page'], "page=" . strval($_GET['page'] + 1), $_SESSION['currentUrl']); ?>">
                 <span class="textBreak">Next</span>
                 <span class="iconBreak"><i class="fas fa-forward"></i></span>
+            </a>
+        </li>
+    <?php endif; ?>
+
+    <!-- Render Last Page Button -->
+    <?php if ($_GET['page'] == $pageNum or $doesListingExist == false) : ?>
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1">
+                <span class="textBreak">Last Page</span>
+                <span class="iconBreak"><i class="fas fa-step-forward"></i></span>
+            </a>
+        </li>
+    <?php else : ?>
+        <li class="page-item ">
+            <a class="page-link"
+                href="<?= str_replace("page=" . $_GET['page'], "page=" . $pageNum, $_SESSION['currentUrl']); ?>">
+                <span class="textBreak">Last Page</span>
+                <span class="iconBreak"><i class="fas fa-step-forward"></i></span>
             </a>
         </li>
     <?php endif; ?>

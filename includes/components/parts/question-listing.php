@@ -10,26 +10,24 @@
     if (isset($_GET['searchKeyword'])) {
 
         //SQL to get current question data associated with search keyword and the range of pagination
-        $sql = "SELECT q.id, q.title, q.content, q.postdate, u.username 
+        $sql_search = "SELECT q.id, q.title, q.content, q.postdate, u.username 
                 FROM Question as q 
                 LEFT JOIN User as u 
                 ON q.user_id = u.id 
-                WHERE q.title LIKE '%" . addslashes($_GET['searchKeyword']) . "%'
+                WHERE q.title LIKE '%". addslashes($_GET['searchKeyword']) ."%'
                 ORDER BY q.postdate DESC
-                LIMIT $thisPageFirstRow, ($thisPageFirstRow + $rowsPerPage)";
-        $result = mysqli_query($conn, $sql);
+                LIMIT $thisPageFirstRow, $rowsPerPage";
+        $result_search = mysqli_query($conn, $sql_search);
 ?>
-
         <div class="row py-2">
             <h5>You are searching : <?= addslashes($_GET['searchKeyword']) ?></h5>
         </div>
 
 
     <?php
-
         //If question data is successfully retrieved, render the result inside webpage, otherwise render "No question found"
-        if (mysqli_num_rows($result) > 0) :
-            while ($row = mysqli_fetch_assoc($result)) :
+        if (mysqli_num_rows($result_search) > 0) :
+            while ($row = mysqli_fetch_assoc($result_search)) :
     ?>
             <div class="row my-2">
                 <a class="text-black" href="./forum.php?page=1&question=<?= $row['id'] ?>">

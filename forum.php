@@ -16,11 +16,21 @@
     //Set tab title
     $pageTitle = "Question";
 
+    //Set number of answer to be rendered in single page
+    $rowsPerPage = 50;
+
     //Global variable to store status about whether question is existed in database
     $doesListingExist = false;
 
     //Create connection to server
     require_once './includes/functions/connectDB.php';
+
+    $sql = "SELECT q.title
+    FROM Question as q 
+    LEFT JOIN User as u 
+    ON q.user_id = u.id 
+    WHERE q.id = " . $_GET['question'];
+    $result = mysqli_query($conn, $sql);    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +41,22 @@
     </head>
 
     <body>
-        <!-- Include header -->
+        
         <header class="sticky-top z-depth-1">
+            <!-- Include header -->
             <?php include "./includes/components/parts/header.php"; ?>
+
+
+            <!-- Include breadcrumbs -->
+            <?php
+                //If query is success
+                if (mysqli_num_rows($result) > 0) :
+                    //Loop throught the result
+                    while ($row = mysqli_fetch_assoc($result)) :
+                        include "./includes/components/parts/breadcrumb.php"; 
+                    endwhile;
+                endif;
+            ?>
         </header>
         <main>
             <div class="container py-2">
@@ -53,11 +76,7 @@
                     //Loop throught the result
                     while ($row = mysqli_fetch_assoc($result)) :
             ?>
-                <!-- Include breadcrumbs -->
-                <section class="py-2">
-                    <?php include "./includes/components/parts/breadcrumb.php"; ?>
-                </section>
-
+                
                 <!-- Question Card -->
                 <section class="py-2">
                     <div class="row">
@@ -119,7 +138,7 @@
                                 </div>
 
                                 <!-- Set Question Content -->
-                                <p class="card-text text-justify" id="questionContent-<?= $row['id'] ?>">
+                                <p class="card-text text-justify text-content" id="questionContent-<?= $row['id'] ?>">
                                     <?= $row['content'] ?></p>
                             </div>
                         </div>
@@ -141,53 +160,21 @@
                 </section>
 
                 <!-- Post answer form -->
-                <section class="py-2">
-
-                    <!-- If user is currently logged in, render post answer form open tag -->
-                    <?php if ($hasLogin) : ?>
-                        <form action="./includes/functions/answer/post.php" method="POST" name="postAnswerSubmit"
-                            id="postAnswerForm">
-                    <?php endif; ?>
-
-                        <div class="card">
-                            <div class="card-header blue">
-                                <div class="row">
-                                    <div class="col-6 my-auto">
-                                        <h5 class="text-white">Share Your Answer</h5>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <button class="btn btn-primary post-answer" type="submit" id="postAnswerBtn"
-                                            name="postAnswerSubmit">
-                                            <span class="textBreak">Post</span>
-                                            <span class="iconBreak"><i class="fas fa-share"></i></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-
-                                    <!-- Area to get user input for answer content -->
-                                    <textarea class="form-control rounded-0" id="answerContent" name="postAnswerContent"
-                                        rows="5"></textarea>
-
-                                    <!-- Area to temporary store current user ID -->
-                                    <input type="text" class="d-none" name="currentUserID"
-                                        value="<?= $_SESSION['userID'] ?>" />
-
-                                    <!-- Area to temporary store current question ID -->
-                                    <input type="text" class="d-none" name="currentQuestionID"
-                                        value="<?= $_SESSION['currentQuestionID'] ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- If user is currently logged in, render post answer form close tag -->
-                    <?php if ($hasLogin) : ?>
-                        </form>
-                    <?php endif; ?>
-
+                <section class="container">
+                    <button class="fixed-bottom btn blue-gradient p-3 text-white postAnswerFloatBtn" id="postAnswerBtn" data-toggle="modal" 
+                    data-target="<?php 
+                                    //If user is currently logged in, set target to #postAnswerModal, otherwise set target to #failedToModal
+                                    if ($hasLogin) 
+                                        echo "#postAnswerModal";
+                                    else 
+                                        echo "#failedToModal";
+                                ?>"><i class="fas fa-comment fa-3x"></i></button>
                 </section>
+
+                <?php 
+                    //If user is currently logged in, include post answer modal
+                    if ($hasLogin) include "./includes/components/modals/post-answer-modal.php";
+                ?>
             </div>
         </main>
     <?php
@@ -226,41 +213,26 @@
         mysqli_close($conn);
     ?>
     </body>
-    <script type="text/javascript">
-    $(document).ready(function() {
+    <!-- If user is currently NOT logged in, render these javascript logic -->
 
-    //If user is currently logged in
-    <?php if ($hasLogin) : ?>
-
-        //Trigger post answer submit event
-        $("#postAnswerForm").submit(function() {
-
-            //If post answer form is currently empty
-            if (!$("#answerContent").val()) {
-
-                //Trigger alert modal to notify
+        <script type="text/javascript">
+        $(document).ready(function() {
+            <?php if (!$hasLogin) : ?>
+            //Trigger post answer button event to show alert
+            $("#postAnswerBtn").click(function() {
                 $("#messageHeadline").empty().append("Cannot Post Answer");
-                $("#messageBody").empty().append("Answer cannot leave blank");
+                $("#messageBody").empty().append("You need to login to post answer");
                 $("#failedToModal").modal('show');
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-            } else {
+            })
+            <?php endif; ?>
 
-                //Allow user to submit form
-                return true;
-            }
+            $("#postAnswerBtn").tooltip({
+                trigger: "hover",
+                title: "Share Your Answer"
+            });
         });
-    <?php else : ?>
+        </script>
 
-        //Trigger post answer button event to show alert
-        $("#postAnswerBtn").click(function() {
-            $("#messageHeadline").empty().append("Cannot Post Answer");
-            $("#messageBody").empty().append("You need to login to post answer");
-            $("#failedToModal").modal('show');
-        })
-    <?php endif; ?>
-    });
-    </script>
 
+   
 </html>

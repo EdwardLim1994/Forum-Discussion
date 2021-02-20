@@ -31,7 +31,7 @@
                                 <div class="form-row">
                                     <div class="col-12 mb-3 md-form">
                                         <label for="loginUsername" id="loginUsernameLabel">
-                                            <i class="fas fa-user px-3"></i>Your username
+                                            <i class="fas fa-user px-3"></i>Username or Email
                                         </label>
                                         <input type="text" id="loginUsername" name="loginUsername" class="form-control"
                                             required>

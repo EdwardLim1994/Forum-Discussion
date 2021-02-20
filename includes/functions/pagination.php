@@ -1,6 +1,5 @@
 <?php
-    //Set number of question to be rendered in single page
-    $rowsPerPage = 10;
+    
     $result = mysqli_query($conn, $sql);
 
     //Count the total question existing in database
@@ -18,3 +17,4 @@
 
     //Calculate the index for the first row of page
     $thisPageFirstRow = ($page - 1) * $rowsPerPage;
+    
