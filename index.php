@@ -33,7 +33,7 @@
     //Redirect to home page
 ?>
     <script type="text/javascript">
-        window.location.replace("http://localhost/Forum-Discussion/list.php?page=1");
+        window.location.replace("http://localhost/html/Forum-Discussion/list.php?page=1");
     </script>
 <?php
 

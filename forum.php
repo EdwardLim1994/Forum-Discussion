@@ -80,7 +80,7 @@
                 <!-- Question Card -->
                 <section class="py-2">
                     <div class="row">
-                        <div class="card p-3">
+                        <div class="p-3 card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
@@ -113,17 +113,17 @@
                                                     <!-- Include the Edit and Delete Button -->
                                                     <div class="row">
                                                         <div class="col-lg-8 col-md-3 col-sm-4"></div>
-                                                        <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-                                                            <button class="btn btn-default px-3 editQuestionBtn" data-toggle="modal"
+                                                        <div class="text-center col-lg-2 col-md-3 col-sm-4">
+                                                            <button class="px-3 btn btn-default editQuestionBtn" data-toggle="modal"
                                                                 data-target="#editQuestionModal">
                                                                 <i class="fas fa-edit"></i>
                                                                 <input type="number" class="d-none"
                                                                     value="<?= $_GET['question'] ?>">
                                                             </button>
                                                         </div>
-                                                        <div class="col-lg-2 col-md-3 col-sm-4 text-center" data-toggle="modal"
+                                                        <div class="text-center col-lg-2 col-md-3 col-sm-4" data-toggle="modal"
                                                             data-target="#confirmDeleteQuestionModal">
-                                                            <button class="btn btn-danger px-3 deleteQuestionBtn">
+                                                            <button class="px-3 btn btn-danger deleteQuestionBtn">
                                                                 <i class="far fa-trash-alt "></i>
                                                                 <input type="number" class="d-none"
                                                                     value="<?= $_GET['question'] ?>">
@@ -138,7 +138,7 @@
                                 </div>
 
                                 <!-- Set Question Content -->
-                                <p class="card-text text-justify text-content" id="questionContent-<?= $row['id'] ?>">
+                                <p class="text-justify card-text text-content" id="questionContent-<?= $row['id'] ?>">
                                     <?= $row['content'] ?></p>
                             </div>
                         </div>
@@ -160,16 +160,16 @@
                 </section>
 
                 <!-- Post answer form -->
-                <section class="container">
-                    <button class="fixed-bottom btn blue-gradient p-3 text-white postAnswerFloatBtn" id="postAnswerBtn" data-toggle="modal" 
+                <!-- <section class="container w-100"> -->
+                    <button class="p-3 text-white fixed-bottom btn btn-info postAnswerFloatBtn" id="postAnswerBtn" data-toggle="modal" 
                     data-target="<?php 
                                     //If user is currently logged in, set target to #postAnswerModal, otherwise set target to #failedToModal
                                     if ($hasLogin) 
                                         echo "#postAnswerModal";
-                                    else 
+                                    else    
                                         echo "#failedToModal";
                                 ?>"><i class="fas fa-comment fa-3x"></i></button>
-                </section>
+                <!-- </section> --> 
 
                 <?php 
                     //If user is currently logged in, include post answer modal
